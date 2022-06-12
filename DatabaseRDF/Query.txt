@@ -1,0 +1,189 @@
+
+QUERIES
+    1. Elencare tutti i personaggi e teorie che hanno contributo a sviluppare queste ultime.
+    2. Elencare tutti gli artefatti utilizzati nell’esperimento caduta del grave
+    3. Elencare tutti i personaggi che hanno causato la prima rivoluzione scientifica
+    4. Elencare tutti i principi inclusi nella teoria meccanicista
+    5. Elencare tutti gli scienziati fisici e i filosofi naturalistici
+    6. Elencare tutti i personaggi che sono vissuti nell’epoca classica
+    7. Elencare i principi in cui viene utilizzato/menzionato l’oggetto naturale Sole
+    8. Seleziona le teorie che hanno contribuito a sviluppare fisici e filosofi
+
+    1.
+    PREFIX : <http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#>
+ 
+    SELECT ?personaggio ?teoria
+		WHERE {
+			?personaggio a :Personaggio;
+							:haContribuitoASviluppare ?teoria.
+		}
+   
+   
+    2. 
+    PREFIX : <http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#>
+    
+    SELECT ?artefatto ?esperimento
+		WHERE {
+			?esperimento a :Esperimento;
+			:esperimento_denominato ?name.
+			?artefatto a :Artefatto;
+			:artefattoUtilizzatoIn ?esperimento.
+			FILTER ( regex (?name, 'Caduta del grave'))
+		}
+  
+  
+    3. 
+    PREFIX : <http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#>
+    SELECT ?personaggio ?evento
+		WHERE {
+			?evento a :Evento_scientifico;
+			:nome_Evento ?name.
+			?personaggio a :Personaggio;
+			:causa ?evento.
+			FILTER( regex (?name, 'Prima Rivoluzione Scientifica'))
+		}
+   
+   
+    4. 
+    PREFIX : <http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#>
+    
+    SELECT ?principio 
+		WHERE {
+			?teoria a :Teoria;
+			:nome_Teoria ?name;
+			:èCompostoDa ?principio.
+			?principio a :Principio.
+			FILTER( regex (?name, 'Teoria Meccanicista'))
+		}
+    
+ 
+    5.
+    PREFIX : <http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#>
+    
+	SELECT 	?fisico  ?filosofo
+		WHERE{
+			{?fisico a :Scienziato_fisico}
+			UNION
+			{?filosofo a :Filosofo_naturale}		
+		}	
+   
+   
+    6.
+    PREFIX : <http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#>
+
+    SELECT ?personaggio
+		WHERE{
+			?personaggio a :Personaggio.
+			?epoca a :Epoca;
+			:nome_Epoca ?name.
+			?personaggio :haVissuto ?epoca.
+			FILTER( regex(?name,'epoca classica'))
+		}
+
+  
+  
+  
+  
+  
+  
+    7. 
+    PREFIX : <http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#>
+
+    SELECT ?principio
+		WHERE{
+			?principio a :Principio.
+			?oggetto a :Oggetto_naturale;
+			:nome_Oggetto ?name;
+			:oggettoUtilizzatoIn ?principio.
+			FILTER( regex(?name, 'Sole'))
+		}
+    
+    
+    8. 
+    PREFIX : <http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#>
+
+    SELECT ?teoria ?personaggio
+		WHERE{
+			?teoria a :Teoria;
+			:haContributore ?personaggio.
+		{
+			SELECT ?personaggio
+				WHERE {
+					{?personaggio a :Scienziato_fisico}
+					UNION
+					{?personaggio a :Cultore_filosofo}
+					}
+		}
+		}
+   
+   
+    9. 
+	PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX : <http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#>
+
+	SELECT ?personaggio ?data
+		WHERE {
+			?personaggio :haContribuitoASviluppare
+            :Teoria_meccanicista;
+			:nome_Personaggio ?nome.
+			FILTER( regex (?nome,'Isaac Newton'))
+				SERVICE <https://query.wikidata.org/sparql> {
+					{<http://www.wikidata.org/entity/Q935> <http://www.wikidata.org/prop/direct/P569> ?data.}
+        
+				}
+		}
+	
+	10. 
+	PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX : <http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#>
+	PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+	PREFIX dbo: <http://dbpedia.org/ontology/>
+	PREFIX dbr: <http://dbpedia.org/resource/>
+
+	SELECT ?personaggio ?data
+	WHERE {
+		?personaggio :haContribuitoASviluppare
+            :Teoria_meccanicista;
+			:nome_Personaggio ?nome.
+		FILTER( regex (?nome,'Isaac Newton'))
+			SERVICE <https://dbpedia.org/sparql> {   
+				{dbr:Isaac_Newton dbo:birthDate ?data.}
+			}
+	}
+
+
+    11.
+	
+    PREFIX : <http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#>
+
+	INSERT DATA
+		{:Gottfried_Wilhelm_von_Leibniz :causa :epoca_moderna}
+    
+    
+	
+	12. 
+	
+	ASK {
+    <http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Gottfried_Wilhelm_von_Leibniz>
+        <http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#causa>
+            <http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#epoca_moderna>
+		}
+
+    13. 
+    PREFIX : <http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#>
+
+	DELETE DATA
+		{:Gottfried_Wilhelm_von_Leibniz :causa :epoca_moderna}
+
+    14. 
+PREFIX : <http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#>
+Galileo_Galilei
+
+
+
+
+
+http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Gottfried_Wilhelm_von_Leibniz
+http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#causa
+http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#epoca_moderna
+   

@@ -1,0 +1,2636 @@
+@prefix : <http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/#> .
+@prefix dul: <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann: <http://purl.org/vocab/vann/#> .
+@prefix modsci: <https://w3id.org/skgo/modsci#> .
+@prefix schema: <http://schema.org/#> .
+@base <http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience> .
+
+<http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience> rdf:type owl:Ontology ;
+                                                                       owl:imports <http://www.ontologydesignpatterns.org/cp/owl/set.owl> ;
+                                                                       <http://purl.org/dc/elements/1.1/creator> "Simone Lissandrello"^^xsd:string ;
+                                                                       <http://purl.org/dc/elements/1.1/date> "2022-01-03T00:00:00"^^xsd:dateTime ;
+                                                                       <http://purl.org/dc/elements/1.1/description> """Ontologia creata per classificare tutti i personaggi storici di filosofia e le scienze fondamentali; fisica, chimica, matematica e astronomia.
+ E' possibile utilizzare epoche personalizzate e collocare i personaggi con le loro scoperte e invenzioni in tali epoche. 
+L'ontologia permette di descrivere teorie scientifiche come composizione di principi e altre teorie."""^^xsd:string ;
+                                                                       <http://purl.org/vocab/vann/preferredNamespacePrefix> "oc"^^xsd:string ;
+                                                                       :preferredNamespaceUri "http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#"^^xsd:string ;
+                                                                       rdfs:label "Ontologia delle grandi menti"@it ,
+                                                                                  "Ontology of great minds"@en ;
+                                                                       owl:versionInfo 1.0 ,
+                                                                                       "Created by Simone Lissandrello"^^xsd:string .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/elements/1.1/creator
+<http://purl.org/dc/elements/1.1/creator> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/date
+<http://purl.org/dc/elements/1.1/date> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/description
+<http://purl.org/dc/elements/1.1/description> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/title
+<http://purl.org/dc/elements/1.1/title> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/vocab/vann/preferredNamespacePrefix
+<http://purl.org/vocab/vann/preferredNamespacePrefix> rdf:type owl:AnnotationProperty .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#preferredNamespaceUri
+:preferredNamespaceUri rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#hasMember
+<http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#hasMember> rdfs:comment "Relazione tra collezioni ed entità, ad esempio 'la mia collezione di sassofoni include un vecchio e originale Adolphe Sax alto."^^xsd:string ;
+                                                                              rdfs:label "ha membro"@it .
+
+
+###  http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#isMemberOf
+<http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#isMemberOf> rdfs:label "è membro di"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#artefattoSviluppatoDa
+:artefattoSviluppatoDa rdf:type owl:ObjectProperty ;
+                       owl:inverseOf :sviluppaArtefatto ;
+                       rdfs:domain :Artefatto ;
+                       rdfs:range :Personaggio ;
+                       owl:propertyChainAxiom ( :èIdeatoDa
+                                                :èInterpretatoDa
+                                              ) ;
+                       rdfs:comment """Relationship that binds an artifact and the historical figure who developed it.
+
+For example, 'Galileo Galilei' developed the 'water clock' artifact."""^^xsd:string ,
+                                    """Relazione che lega un artefatto e il personaggio storico che lo ha sviluppato. 
+
+Ad esempio, 'Galileo Galilei' ha sviluppato l'artefatto 'orologio ad acqua'."""^^xsd:string ;
+                       rdfs:label "artefatto sviluppato da"@it ,
+                                  "artifact developed by"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#artefattoUtilizzatoIn
+:artefattoUtilizzatoIn rdf:type owl:ObjectProperty ;
+                       owl:inverseOf :utilizzaStrumento ;
+                       rdfs:domain :Artefatto ;
+                       rdfs:comment """Relation that links an artifact to the event, process, object, principle that uses it.
+
+For example, 'water clock' is the artifact used in the 'falling of the grave' experiment."""^^xsd:string ,
+                                    """Relazione che lega un artefatto all'evento, processo, oggetto, principio che lo utilizza.
+
+Ad esempio,  'orologio ad acqua' è l'artefatto utilizzato nell'esperimento 'caduta del grave'."""^^xsd:string ;
+                       rdfs:label "artefatto utilizzato in"@it ,
+                                  "artifact used in"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#causa
+:causa rdf:type owl:ObjectProperty ;
+       owl:inverseOf :causatoDa ;
+       rdf:type owl:TransitiveProperty ;
+       rdfs:comment """Relationship representing the Law of Cause and Effect. The causal relationship indicates the existence of a necessary connection, as if the facts are linked together.
+
+For example, the scientific event 'first scientific revolution' causes the beginning of a new epoch called, for example, the 'classical epoch'."""^^xsd:string ,
+                    """Relazione che rappresenta la Legge di Causa Effetto. La relazione causale indica l'esistenza di una connessione necessaria, come se i fatti fossero collegati tra loro.
+
+Ad esempio, l'evento scientifico 'prima rivoluzione scientifica' causa l'inizio di una nuova epoca denominata, ad esempio, 'epoca classica'."""^^xsd:string ;
+       rdfs:label "causa"@it ,
+                  "cause"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#causatoDa
+:causatoDa rdf:type owl:ObjectProperty ,
+                    owl:TransitiveProperty ;
+           rdfs:comment """Relationship representing the Law of Cause and Effect. The causal relationship indicates the existence of a necessary connection, as if the facts were linked together.
+
+For example, the beginning of the epoch called the 'classical epoch' is caused by an event called the 'first scientific revolution'."""^^xsd:string ,
+                        """Relazione che rappresenta la Legge di Causa Effetto. La relazione causale indica l'esistenza di una connessione necessaria, come se i fatti fossero collegati tra loro.
+
+Ad esempio, l'inizio dell'epoca denominata 'epoca classica' è causata da un evento denominato 'prima rivoluzione scientifica'."""^^xsd:string ;
+           rdfs:label "causato da"@it ,
+                      "caused by"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#esperimentoSviluppatoDa
+:esperimentoSviluppatoDa rdf:type owl:ObjectProperty ;
+                         owl:inverseOf :sviluppaEsperimento ;
+                         rdfs:domain :Esperimento ;
+                         rdfs:range :Personaggio ;
+                         owl:propertyChainAxiom ( :èSviluppatoDa
+                                                  :èInterpretatoDa
+                                                ) ;
+                         rdfs:comment """Relation that links the experiment to the historical figure who developed / introduced it to the community.
+
+For example, the 'photoelectric effect' experiment was developed by the physical scientist 'Albert Einstein'."""^^xsd:string ,
+                                      """Relazione che lega l'esperimento al personaggio storico che lo ha sviluppato/introdotto alla comunità.
+
+Ad esempio, l'esperimento 'effetto foto-elettrico'  è stato sviluppato dallo scienziato fisico 'Albert Einstein'."""^^xsd:string ;
+                         rdfs:label "esperimento sviluppato da"@it ,
+                                    "experiment developed by"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#haContribuitoASviluppare
+:haContribuitoASviluppare rdf:type owl:ObjectProperty ;
+                          rdfs:subPropertyOf <https://dbpedia.org/property/knownFor> ;
+                          owl:inverseOf :haContributore ;
+                          rdfs:domain :Personaggio ;
+                          rdfs:range :Teoria ;
+                          owl:propertyChainAxiom ( :haRuolo
+                                                   :haSistematizzato
+                                                   :èParteDi
+                                                 ) ;
+                          rdfs:comment """Relationship that binds the historical figure to the theory, a set of theories and principles, which he himself helped to develop.
+
+For example, 'Niccolò_Copernico' helped develop the 'Copernican Theory'."""^^xsd:string ,
+                                       """Relazione che lega il personaggio storico alla teoria, insieme di teorie e principi, che egli stesso ha contribuito a sviluppare.
+
+Ad esempio, 'Niccolò_Copernico' ha contribuito a sviluppare la 'Teoria Copernicana'."""^^xsd:string ;
+                          rdfs:label "ha contribuito a sviluppare"@it ,
+                                     "helped develop"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#haContributore
+:haContributore rdf:type owl:ObjectProperty ;
+                rdfs:domain :Teoria ;
+                rdfs:range :Personaggio ;
+                owl:propertyChainAxiom ( :èCompostoDa
+                                         :èIdeatoDa
+                                         :èInterpretatoDa
+                                       ) ;
+                rdfs:comment """Relation that links the theory, a set of theories and principles, to the historical figure who was a contributor in the development of the first.
+
+For example, 'Mechanist Theory' has 'Cartesio' as its contributor since with his principle of subdivision of reality he has broadened the knowledge of the theory."""^^xsd:string ,
+                             """Relazione che lega la teoria, insieme di teorie e principi, al personaggio storico che è stato contributore nello sviluppo della prima.
+
+Ad esempio, 'Teoria meccanicista' ha come contributore 'Cartesio' poiché con lo sviluppo del principio di suddivisione della realtà ha ampliato la conoscenza della teoria."""^^xsd:string ;
+                rdfs:label "ha contributore"@it ,
+                           "has contributor"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#haIdeato
+:haIdeato rdf:type owl:ObjectProperty ;
+          owl:inverseOf :èIdeatoDa ;
+          rdfs:domain :Ruolo ;
+          rdfs:range :Artefatto ;
+          rdfs:comment """Relation that binds a historical figure in the role of scholar in a possible field of study has devised a particular artifact of his, or accomplice, invention.
+
+For example, 'Galileo Galilei' in the role of 'Physicist' created the artifact 'water clock'."""^^xsd:string ,
+                       """Relazione che lega un personaggio storico nel ruolo di cultore in un possibile campo di studi ha ideato un particolare artefatto di sua, o complice, invenzione.
+
+Ad esempio, 'Galileo Galilei' nel ruolo di 'Fisico' ha ideato l'artefatto 'orologio ad acqua'."""^^xsd:string ;
+          rdfs:label "devised artifact"@en ,
+                     "ha ideato artefatto"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#haRuolo
+:haRuolo rdf:type owl:ObjectProperty ;
+         owl:inverseOf :èInterpretatoDa ;
+         rdfs:domain :Personaggio ;
+         rdfs:range :Ruolo ;
+         rdfs:comment """Relation that binds a historical figure to his field of study in which he has developed a principle, experiment, tool, etc.
+
+For example, 'Isaac Newton' in the role of 'Physicist' systematized the principle that represents the 'first law of dynamics'."""^^xsd:string ,
+                      """Relazione che lega un personaggio storico a un suo campo di studi nella quale ha sviluppato un principio, esperimento, strumento, ecc.
+
+Ad esempio, 'Isaac Newton' nel ruolo di 'Fisico' ha sistematizzato il principio che rappresenta la 'prima legge della dinamica'."""^^xsd:string ;
+         rdfs:label "ha ruolo"@it ,
+                    "has role"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#haScoperto
+:haScoperto rdf:type owl:ObjectProperty ;
+            owl:inverseOf :èScopertoDa ;
+            rdfs:domain :Ruolo ;
+            rdfs:range :Oggetto_naturale ;
+            rdfs:comment """Relation that binds the 'workplace', that is the role played by a character expert in that domain, to the discovery of a natural object.
+
+For example, the 'astronomer contributing to the discovery of the black hole' discovered the natural object 'black hole'.
+
+N.B. the 'workplace' represented by 'astronomer contributing to the discovery of the black hole' can be interpreted by several characters. This is because modeling means that a natural object can be discovered by multiple people in different points of view."""^^xsd:string ,
+                         """Relazione che lega il 'posto di lavoro', cioè il ruolo interpretato da un personaggio esperto di quel dominio, alla scoperta di un oggetto naturale.
+
+Ad esempio, l' 'astronomo contributore alla scoperta del buco nero' ha scoperto l'oggetto naturale 'buco nero'. 
+
+N.B. il 'posto di lavoro' rappresentato da 'astronomo contributore alla scoperta del buco nero' può essere interpretato da più personaggi. Questo perché la modellazione intende che un oggetto naturale può essere scoperto da più persone in punti di vista differenti."""^^xsd:string ;
+            rdfs:label "discovered"@en ,
+                       "ha scoperto"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#haSistematizzato
+:haSistematizzato rdf:type owl:ObjectProperty ;
+                  owl:inverseOf :èSistematizzatoDa ;
+                  rdfs:domain :Ruolo ;
+                  rdfs:range :Principio ;
+                  rdfs:comment """Relation that links the 'workplace', that is the role played by a person who is an expert in that domain, to the systematization of a principle.
+
+For example, the 'laws of dynamics contributor' systematized the 'first law of dynamics' principle.
+
+N.B. the 'workplace' represented by 'contributor laws of dynamics' can be interpreted by several characters. This is because modeling means that a principle can be systematized in different ways."""^^xsd:string ,
+                               """Relazione che lega il 'posto di lavoro', cioè il ruolo interpretato da un personaggio esperto di quel dominio, alla sistematizzazione di un principio.
+
+Ad esempio, il 'contributore leggi della dinamica' ha sistematizzato il principio ''prima legge della dinamica'.
+
+N.B. il 'posto di lavoro' rappresentato da 'contributore leggi della dinamica' può essere interpretato da più personaggi. Questo perché la modellazione intende che un principio può essere sistematizzato in modi differenti."""^^xsd:string ;
+                  rdfs:label "ha sistematizzato"@it ,
+                             "systematized"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#haSviluppato
+:haSviluppato rdf:type owl:ObjectProperty ;
+              owl:inverseOf :èSviluppatoDa ;
+              rdfs:domain :Ruolo ;
+              rdfs:range :Esperimento ;
+              rdfs:comment """Relation that links the 'workplace', that is the role played by an expert in that domain, to the development / invention of an experiment.
+
+For example, the 'grave fall contributor' developed the 'grave fall' experiment.
+
+N.B. the 'workplace' represented by 'grave fall contributor' can be interpreted by several characters. This is because modeling means that an experiment can be developed in different ways."""^^xsd:string ,
+                           """Relazione che lega il 'posto di lavoro', cioè il ruolo interpretato da un personaggio esperto di quel dominio, allo sviluppo/invenzione di  un esperimento. 
+
+Ad esempio, il 'contributore caduta del grave' ha sviluppato l'esperimento 'caduta del grave'.
+
+N.B. il 'posto di lavoro' rappresentato da 'contributore caduta del grave' può essere interpretato da più personaggi. Questo perché la modellazione intende che un esperimento può essere sviluppato in modalità differenti."""^^xsd:string ;
+              rdfs:label "developed"@en ,
+                         "ha sviluppato"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#haVissuto
+:haVissuto rdf:type owl:ObjectProperty ;
+           owl:inverseOf :èVissuto ;
+           rdfs:domain :Personaggio ;
+           rdfs:range :Epoca ;
+           owl:propertyChainAxiom ( :scopreOggetto
+                                    :èIntrodotto
+                                  ) ,
+                                  ( :sviluppaArtefatto
+                                    :èIntrodotto
+                                  ) ,
+                                  ( :sviluppaEsperimento
+                                    :èIntrodotto
+                                  ) ,
+                                  ( :sviluppaPrincipio
+                                    :èIntrodotto
+                                  ) ;
+           rdfs:comment """Relation that binds the historical character to the historical period in which he lived.
+
+For example, 'Claudio Tolomeo' lived in the era of 'first_civilization'."""^^xsd:string ,
+                        """Relazione che lega il Personaggio storico all'epoca storica in cui è vissuto. 
+
+Ad esempio, 'Claudio Tolomeo' ha vissuto nell'epoca della 'prima_civiltà'."""^^xsd:string ;
+           rdfs:label "ha vissuto"@it ,
+                      "lived in"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#oggettoScopertoDa
+:oggettoScopertoDa rdf:type owl:ObjectProperty ;
+                   owl:inverseOf :scopreOggetto ;
+                   rdfs:domain :Oggetto_naturale ;
+                   rdfs:range :Personaggio ;
+                   owl:propertyChainAxiom ( :èScopertoDa
+                                            :èInterpretatoDa
+                                          ) ;
+                   rdfs:comment "Relationship between a natural object and the historical figure who discovered or introduced it to the community."^^xsd:string ,
+                                "Relazione tra un oggetto naturale e il personaggio storico che lo ha scoperto o introdotto alla comunità."^^xsd:string ;
+                   rdfs:label "object discovered by"@en ,
+                              "oggetto scoperto da"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#oggettoUtilizzatoIn
+:oggettoUtilizzatoIn rdf:type owl:ObjectProperty ;
+                     owl:inverseOf :utilizzaOggetto ;
+                     rdfs:domain :Oggetto_naturale ;
+                     rdfs:comment """Relation between a particular natural object with an event, process, experiment, theory, principle or physical object.
+For example the object born in nature 'Sun' is used in the principle that defines the 'first law of kepler'."""^^xsd:string ,
+                                  """Relazione tra un particolare oggetto naturale con un evento, processo, esperimento, teoria, principio o oggetto fisico.
+Ad esempio l'oggetto nato in natura  'Sole' è utilizzato nel principio che definisce la 'prima legge di keplero'."""^^xsd:string ;
+                     rdfs:label "object used in"@en ,
+                                "oggetto utilizzato in"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#precedeTemporalmente
+:precedeTemporalmente rdf:type owl:ObjectProperty ;
+                      owl:inverseOf :segueTemporalmente ;
+                      rdf:type owl:TransitiveProperty ;
+                      rdfs:domain :Epoca ;
+                      rdfs:range :Epoca ;
+                      rdfs:comment """Relazione temporale che lega un epoca a un'altra (epoca)  precedente.
+
+Ad esempio, l'epoca 'epoca classica' precede temporalmente l'epoca 'epoca moderna'."""^^xsd:string ,
+                                   """Temporal relationship that links an epoch to another previous (epoch).
+
+For example, the 'classical age' epoch temporally precedes the 'modern age' epoch."""^^xsd:string ;
+                      rdfs:label "precede temporalmente"@it ,
+                                 "precedes temporally"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#principioSviluppatoDa
+:principioSviluppatoDa rdf:type owl:ObjectProperty ;
+                       owl:inverseOf :sviluppaPrincipio ;
+                       rdfs:domain :Principio ;
+                       rdfs:range :Personaggio ;
+                       owl:propertyChainAxiom ( :èSistematizzatoDa
+                                                :èInterpretatoDa
+                                              ) ;
+                       rdfs:comment """Relationship that binds the principle and the historical character who helped to develop it.
+
+For example, the 'first law of dynamics' law was developed by 'Isaac Newton'."""^^xsd:string ,
+                                    """Relazione che lega il principio e il personaggio storico che ha contribuito a svilupparlo.
+
+Ad esempio, la legge 'prima legge della dinamica' è stata sviluppata da 'Isaac Newton'."""^^xsd:string ;
+                       rdfs:label "principio sviluppato da"@it ,
+                                  "principle developed by"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#principioUtilizzatoIn
+:principioUtilizzatoIn rdf:type owl:ObjectProperty ;
+                       owl:inverseOf :utilizzaPrincipio ;
+                       rdfs:domain :Principio ;
+                       rdfs:comment """Relation that binds a principle to its purposes of use, where its purposes can be multiple and different, for example, events, experiments, objects, artifacts.
+
+For example, the 'first law of dynamics' principle is used in the 'fall of the grave' experiment."""^^xsd:string ,
+                                    """Relazione che lega un principio ai suoi scopi di utilizzo, dove i suoi scopi possono essere molteplici e differenti, ad esempio, eventi, esperimenti, oggetti, artefatti.
+
+Ad esempio, il principio 'prima legge della dinamica' è utilizzato nell'esperimento 'caduta del grave'."""^^xsd:string ;
+                       rdfs:label "principio utilizzato in"@it ,
+                                  "principle used in"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#scopreOggetto
+:scopreOggetto rdf:type owl:ObjectProperty ;
+               rdfs:domain :Personaggio ;
+               rdfs:range :Oggetto_naturale ;
+               rdfs:comment """Relation between a historical character and a particular natural object, the former discovered or introduced the latter to the community.
+For example 'Pierre Simon Laplace' discovered the existence of the natural object 'Black hole'."""^^xsd:string ,
+                            """Relazione tra un personaggio storico e un particolare oggetto naturale, il primo ha scoperto o introdotto alla comunità il secondo. 
+Ad esempio 'Pierre Simon Laplace' ha scoperto l'esistenza dell'oggetto naturale 'Buco nero'."""^^xsd:string ;
+               rdfs:label "discovers object"@en ,
+                          "scopre oggetto"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#segueTemporalmente
+:segueTemporalmente rdf:type owl:ObjectProperty ,
+                             owl:TransitiveProperty ;
+                    rdfs:domain :Epoca ;
+                    rdfs:range :Epoca ;
+                    rdfs:comment """Relazione temporale che lega un epoca a un'altra (epoca) seguente.
+
+Ad esempio, l'epoca 'epoca moderna' segue temporalmente l'epoca 'epoca classica'.."""^^xsd:string ,
+                                 """Temporal relationship that links an epoch to another (epoch) following.
+
+For example, the 'modern epoch' temporally follows the 'classical epoch'."""^^xsd:string ;
+                    rdfs:label "follows temporally"@en ,
+                               "segue temporalmente"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#sviluppaArtefatto
+:sviluppaArtefatto rdf:type owl:ObjectProperty ;
+                   rdfs:domain :Personaggio ;
+                   rdfs:range :Artefatto ;
+                   owl:propertyChainAxiom ( :haRuolo
+                                            :haIdeato
+                                          ) ;
+                   rdfs:comment """Relationship that binds a historical figure to the artifact that he himself helped to develop.
+
+For example, the 'water clock' artifact was developed by 'Galileo Galilei'."""^^xsd:string ,
+                                """Relazione che lega un personaggio storico all'artefatto che egli stesso ha contribuito a sviluppare.
+
+Ad esempio, l'artefatto 'orologio ad acqua' è stato sviluppato da ' Galileo Galilei'."""^^xsd:string ;
+                   rdfs:label "develop artifact"@en ,
+                              "sviluppa artefatto"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#sviluppaEsperimento
+:sviluppaEsperimento rdf:type owl:ObjectProperty ;
+                     rdfs:domain :Personaggio ;
+                     rdfs:range :Esperimento ;
+                     owl:propertyChainAxiom ( :haRuolo
+                                              :haSviluppato
+                                            ) ;
+                     rdfs:comment """Relation that binds a character to the invention or development of an experiment.
+
+For example, 'Galileo Galilei' developed the 'Fall of the grave' experiment."""^^xsd:string ,
+                                  """Relazione che lega un personaggio all'invenzione o sviluppo di un esperimento.
+
+Ad esempio, 'Galileo Galilei' ha sviluppato l'esperimento 'Caduta del grave'."""^^xsd:string ;
+                     rdfs:label "develop experiment"@en ,
+                                "sviluppa esperimento"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#sviluppaPrincipio
+:sviluppaPrincipio rdf:type owl:ObjectProperty ;
+                   rdfs:domain :Personaggio ;
+                   rdfs:range :Principio ;
+                   rdfs:comment """Relationship that binds the historical character and the principle that the former helped to develop
+
+For example, the character 'Isaac Newton' developed the principle represented by the 'first law of dynamics'."""^^xsd:string ,
+                                """Relazione che lega il personaggio storico e il principio che il primo ha contribuito a sviluppare
+
+Ad esempio, il personaggio 'Isaac Newton' ha sviluppato il principio rappresentato dalla 'prima legge della dinamica'."""^^xsd:string ;
+                   rdfs:label "develops principle"@en ,
+                              "sviluppa principio"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#utilizzaOggetto
+:utilizzaOggetto rdf:type owl:ObjectProperty ;
+                 rdfs:range :Oggetto_naturale ;
+                 rdfs:comment """Relationship between any physical event, process, experiment, theory, principle or object with a natural body object.
+
+For example, the principle that defines the 'first law of kepler' uses the natural object 'Sun'."""^^xsd:string ,
+                              """Relazione tra un qualsiasi evento, processo, esperimento, teoria, principio o oggetto fisico con oggetto un corpo naturale.
+
+Ad esempio il principio che definisce la 'prima legge di keplero' utilizza l'oggetto naturale 'Sole'."""^^xsd:string ;
+                 rdfs:label "uses object"@en ,
+                            "utilizza oggetto"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#utilizzaPrincipio
+:utilizzaPrincipio rdf:type owl:ObjectProperty ;
+                   rdfs:range :Principio ;
+                   rdfs:comment """Relationship that binds any event, object, process, principle that uses a particular principle.
+
+For example, the 'Fall of the grave' experiment uses the principle represented by the 'first law of dynamics'."""^^xsd:string ,
+                                """Relazione che lega un qualsiasi evento, oggetto, processo, principio che utilizza un particolare principio.
+
+Ad esempio, l'esperimento 'Caduta del grave' utilizza il principio rappresentato dalla 'prima legge della dinamica'."""^^xsd:string ;
+                   rdfs:label "use principle"@en ,
+                              "utilizza principio"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#utilizzaStrumento
+:utilizzaStrumento rdf:type owl:ObjectProperty ;
+                   rdfs:range :Artefatto ;
+                   rdfs:comment """.Relazione che lega un evento, processo, oggetto o principio all'artefatto che utilizza per compiere il suo obiettivo o per esistere.
+
+Ad esempio, l'esperimento 'caduta del grave' utilizza l'artefatto 'orologio ad acqua'."""^^xsd:string ,
+                                """Relation that binds an event, process, object or principle to the artifact it uses to accomplish its goal or to exist.
+
+For example, the 'fall of the grave' experiment uses the 'water clock' artifact."""^^xsd:string ;
+                   rdfs:label "use the artifact"@en ,
+                              "utilizza artefatto"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#èCompostoDa
+:èCompostoDa rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf <http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#hasMember> ;
+             owl:inverseOf :èParteDi ;
+             rdf:type owl:TransitiveProperty ;
+             rdfs:domain :Teoria ;
+             rdfs:comment """A theory is mathematically represented by a set of distinct elements which can be principles or other theories. This relationship represents the link between the theory and its components.
+
+For example, 'Mechanistic Theory' is composed of 'Newtonian Dynamics' theory."""^^xsd:string ,
+                          """Una teoria è rappresentata matematicamente da un insieme di elementi distinti il quale possono essere principi o altre teorie. Questa relazione rappresenta il collegamento tra la teoria e le sue componenti.
+
+Ad esempio, la 'Teoria meccanicista' è composta dalla teoria 'Dinamica Newtoniana'."""^^xsd:string ;
+             rdfs:label "is composed by"@en ,
+                        "è composta da"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#èIdeatoDa
+:èIdeatoDa rdf:type owl:ObjectProperty ;
+           rdfs:domain :Artefatto ;
+           rdfs:range :Ruolo ;
+           rdfs:comment """Relationship that binds an artifact and the role of the inventor, this role is linked to the characters who conceived / developed the artifact.
+
+For example, the 'water clock' instrument was designed by 'Galileo Galilei."""^^xsd:string ,
+                        """Relazione che lega un artefatto e il ruolo dell'inventore, tale ruolo è legato ai personaggi che hanno ideato/sviluppato l'artefatto.
+
+Ad esempio lo strumento 'orologio ad acqua' è ideato da 'Galileo Galilei."""^^xsd:string ;
+           rdfs:label "is designed by"@en ,
+                      "è ideato da"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#èInterpretatoDa
+:èInterpretatoDa rdf:type owl:ObjectProperty ;
+                 rdfs:domain :Ruolo ;
+                 rdfs:range :Personaggio ;
+                 rdfs:comment """Relationship that binds a field of study to the historical figure who has developed a principle, experiment, tool, etc.
+
+For example, the 'physicist' named 'Isaac Newton' has systematized the principle that represents the 'first law of dynamics'."""^^xsd:string ,
+                              """Relazione che lega un campo di studi al personaggio storico che ha sviluppato un principio, esperimento, strumento, ecc.
+
+Ad esempio,il 'fisico' di nome 'Isaac Newton' ha sistematizzato il principio che rappresenta la 'prima legge della dinamica'."""^^xsd:string ;
+                 rdfs:label "is played by"@en ,
+                            "è interpretato da"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#èIntrodotto
+:èIntrodotto rdf:type owl:ObjectProperty ;
+             owl:inverseOf :èStatoIntrodotto ;
+             rdfs:range :Epoca ;
+             rdfs:comment """Relation that links an event, object, experiment, to the time in which it was discovered or introduced to the community.
+
+For example, the 'photoelectric' principle is introduced in the 'modern era'."""^^xsd:string ,
+                          """Relazione che lega un evento, oggetto, esperimento, all'epoca in cui è stato scoperto o introdotto alla comunità.
+
+Ad esempio, il principio 'fotoelettrico' è introdotto nella 'epoca moderna'."""^^xsd:string ;
+             rdfs:label "is introduced"@en ,
+                        "è introdotto"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#èParteDi
+:èParteDi rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf <http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#isMemberOf> ;
+          rdf:type owl:TransitiveProperty ;
+          rdfs:range :Teoria ;
+          rdfs:label """A theory is mathematically represented by a set of distinct elements which can be principles or other theories. This relationship represents the belonging of a principle / theory to another larger theory..
+
+For example, the 'Newtonian Dynamics' is part of 'Mechanistic Theory'."""^^xsd:string ,
+                     """Una teoria è rappresentata matematicamente da un insieme di elementi distinti il quale possono essere principi o altre teorie. Questa relazione rappresenta l'appartenenza di un principio/teoria a un'altra teoria più grande.
+
+Ad esempio, la 'Teoria meccanicista' è composta dalla teoria 'Dinamica Newtoniana'."""^^xsd:string ,
+                     "is part of"@en ,
+                     "è parte di"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#èScopertoDa
+:èScopertoDa rdf:type owl:ObjectProperty ;
+             rdfs:domain :Oggetto_naturale ;
+             rdfs:range :Ruolo ;
+             rdfs:comment """Relation that binds a natural object to the 'workplace', that is, the role played by a person who is an expert in that domain.
+
+For example, the natural object \"Black Hole\" was discovered by \"astronomer who contributed to the discovery of the black hole\""""^^xsd:string ,
+                          """Relazione che lega un oggetto naturale al 'luogo di lavoro', cioè il ruolo svolto da un personaggio esperto di quel dominio.
+
+Ad esempio, l'oggetto naturale \"Black Hole\" è stato scoperto da \"astronomo che ha contribuito alla scoperta del buco nero\""""^^xsd:string ;
+             rdfs:label "was discovered by"@en ,
+                        "è scoperto da"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#èSistematizzatoDa
+:èSistematizzatoDa rdf:type owl:ObjectProperty ;
+                   rdfs:domain :Principio ;
+                   rdfs:range :Ruolo ;
+                   rdfs:comment """Relationship that binds a principle to the role, played by characters, who systematized it. The 'discovery of a principle' relation is included in the 'systematized' relation.
+
+For example, the 'first law of dynamics' principle has been systematized by 'contributorLaws_of_dynamics'.
+
+N.B. the 'workplace' represented by 'contributor laws of dynamics' can be interpreted by several characters. This is because modeling means that a principle can be systematized in different ways."""^^xsd:string ,
+                                """Relazione che lega un principio al ruolo, interpretato da personaggi, che lo ha sistematizzato. La relazione 'scoperta di un principio' è inclusa nella relazione  'ha sistematizzato'.
+
+Ad esempio, il principio 'prima legge della dinamica' è stato sistematizzato da 'contributoreLeggi_della_dinamica'.
+
+N.B. il 'posto di lavoro' rappresentato da 'contributore leggi della dinamica' può essere interpretato da più personaggi. Questo perché la modellazione intende che un principio può essere sistematizzato in modi differenti."""^^xsd:string ;
+                   rdfs:label "is  systematized by"@en ,
+                              "è sistematizzato da"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#èStatoIntrodotto
+:èStatoIntrodotto rdf:type owl:ObjectProperty ;
+                  rdfs:domain :Epoca ;
+                  rdfs:comment """Relation that links an epoch to the event, object, experiment in which it was invented or developed.
+
+For example, in the 'modern era' the 'photoelectric' principle was introduced."""^^xsd:string ,
+                               """Relazione che lega un epoca al evento, oggetto, esperimento in cui è stato inventato o sviluppato.
+
+Ad esempio, nell'epoca 'epoca moderna' è stato introdotto il principio 'fotoelettrico'."""^^xsd:string ;
+                  rdfs:label "was introduced"@en ,
+                             "è stato introdotto"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#èSviluppatoDa
+:èSviluppatoDa rdf:type owl:ObjectProperty ;
+               rdfs:domain :Esperimento ;
+               rdfs:range :Ruolo ;
+               rdfs:comment """Relationship that links an experiment to the inventor who plays that role ('workplace').
+
+For example, the 'grave fall' experiment was developed by 'grave fall contributor'.
+
+N.B. the 'workplace' represented by 'grave fall contributor' can be interpreted by several characters. This is because modeling means that an experiment can be developed in different ways."""^^xsd:string ,
+                            """Relazione che lega un esperimento all'inventore che interpreta quel ruolo ('posto di lavoro').
+
+Ad esempio, l'esperimento 'caduta del grave' è stato sviluppato da 'contributore caduta del grave'.
+
+N.B. il 'posto di lavoro' rappresentato da 'contributore caduta del grave' può essere interpretato da più personaggi. Questo perché la modellazione intende che un esperimento può essere sviluppato in modalità differenti."""^^xsd:string ;
+               rdfs:label "is developed by"@en ,
+                          "è sviluppato da"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#èVissuto
+:èVissuto rdf:type owl:ObjectProperty ;
+          rdfs:domain :Epoca ;
+          rdfs:range :Personaggio ;
+          owl:propertyChainAxiom ( :èStatoIntrodotto
+                                   :artefattoSviluppatoDa
+                                 ) ,
+                                 ( :èStatoIntrodotto
+                                   :esperimentoSviluppatoDa
+                                 ) ,
+                                 ( :èStatoIntrodotto
+                                   :oggettoScopertoDa
+                                 ) ,
+                                 ( :èStatoIntrodotto
+                                   :principioSviluppatoDa
+                                 ) ;
+          rdfs:comment """Relationship that binds the era to the historical figure.
+
+For example, in the epoch of the 'first civilization' lived 'Claudio Tolomeo'."""^^xsd:string ,
+                       """Relazione che lega l'epoca al personaggio storico.
+
+Ad esempio, nell'epoca della 'prima_civiltà' ha vissuto 'Claudio Tolomeo'."""^^xsd:string ;
+          rdfs:label "lived"@en ,
+                     "è vissuto"@it .
+
+
+###  http://www.w3.org/2004/02/skos/core#broadMatch
+skos:broadMatch rdf:type owl:ObjectProperty ;
+                rdfs:comment "Soggetto è più specifico dell'oggetto"^^xsd:string ;
+                rdfs:label "BroadMatch (skos)"@en .
+
+
+###  http://www.w3.org/2004/02/skos/core#exactMatch
+skos:exactMatch rdf:type owl:ObjectProperty ;
+                rdfs:comment "Soggetto e oggetto coincidono perfettamente"^^xsd:string ;
+                rdfs:label "Exact Match (skos)"@en .
+
+
+###  http://www.w3.org/2004/02/skos/core#narrowMatch
+skos:narrowMatch rdf:type owl:ObjectProperty ;
+                 rdfs:comment "Soggetto è più generale dell'oggetto"^^xsd:string ;
+                 rdfs:label "Narrow Match (skos)"@en .
+
+
+###  https://dbpedia.org/property/knownFor
+<https://dbpedia.org/property/knownFor> rdf:type owl:ObjectProperty ;
+                                        rdfs:comment "Property defined on the DBpedia resource that represents the link between a character and his creations (any type)."^^xsd:string ,
+                                                     "Proprietà definita sulla risorsa DBpedia che rappresenta il collegamento tra un personaggio e le sue creazioni (ogni tipo)."^^xsd:string ;
+                                        rdfs:isDefinedBy "https://dbpedia.org/"^^xsd:string ;
+                                        rdfs:label "Conosciuto per (DBpedia)"@it ,
+                                                   "known for (DBpedia)"@en .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.ontologydesignpatterns.org/cp/owl/set.owl#size
+<http://www.ontologydesignpatterns.org/cp/owl/set.owl#size> rdf:type owl:FunctionalProperty ;
+                                                            rdfs:comment "Numero di elementi appartenenti a una collezione"^^xsd:string ;
+                                                            rdfs:label "ha dimensione"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#anno_Creazione
+:anno_Creazione rdf:type owl:DatatypeProperty ,
+                         owl:FunctionalProperty ;
+                rdfs:domain :Oggetto ;
+                rdfs:range xsd:dateTime ;
+                rdfs:comment "Property that represents the year of invention or creation of an object."^^xsd:string ,
+                             "Proprietà che rappresenta l'anno di invenzione o creazione di un oggetto."^^xsd:string ;
+                rdfs:label "ha anno di creazione"@it ,
+                           "has year of creation"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#anno_di_Verifica
+:anno_di_Verifica rdf:type owl:DatatypeProperty ,
+                           owl:FunctionalProperty ;
+                  rdfs:domain :Evento_scientifico ;
+                  rdfs:range xsd:dateTime ;
+                  rdfs:comment "Property that represents the year in which a particular scientific event occurs"^^xsd:string ,
+                               "Proprietà che rappresenta l'anno in cui si verifica un particolare evento scientifico"^^xsd:string ;
+                  rdfs:label "occurs in the year"@en ,
+                             "si verifica nell'anno"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#data_di_Nascita
+:data_di_Nascita rdf:type owl:DatatypeProperty ;
+                 owl:equivalentProperty <https://dbpedia.org/ontology/birthDate> ,
+                                        <https://schema.org/birthDate> ,
+                                        <https://www.wikidata.org/wiki/Property:P569> ;
+                 rdf:type owl:FunctionalProperty ;
+                 rdfs:domain :Personaggio ;
+                 rdfs:range xsd:dateTime ;
+                 rdfs:comment "Property that represents the date of birth of a historical figure."^^xsd:string ,
+                              "Proprietà che rappresenta la data di nascita di un personaggio storico."^^xsd:string ;
+                 rdfs:label "was born"@en ,
+                            "è nato in data"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#esperimento_denominato
+:esperimento_denominato rdf:type owl:DatatypeProperty ;
+                        rdfs:domain :Esperimento ;
+                        rdfs:range xsd:string ;
+                        rdfs:comment "Property that represents the name given to a particular experiment."^^xsd:string ,
+                                     "Proprietà che rappresenta il nome dato a un particolare esperimento."^^xsd:string ;
+                        rdfs:label "esperimento denominato"@it ,
+                                   "experiment named"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#fine_Periodo_Temporale
+:fine_Periodo_Temporale rdf:type owl:DatatypeProperty ,
+                                 owl:FunctionalProperty ;
+                        rdfs:domain :Epoca ;
+                        rdfs:range xsd:dateTime ;
+                        rdfs:comment "Property that represents the year in which a certain epoch ends."^^xsd:string ,
+                                     "Proprietà che rappresenta l'anno in cui termina una determinata epoca."^^xsd:string ;
+                        rdfs:label "ends in the year"@en ,
+                                   "termina nell'anno"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#iniziata_a_Sviluppare
+:iniziata_a_Sviluppare rdf:type owl:DatatypeProperty ,
+                                owl:FunctionalProperty ;
+                       rdfs:domain :Teoria ;
+                       rdfs:range xsd:dateTime ;
+                       rdfs:comment "Property that represents the year in which the development of a particular theory began."^^xsd:string ,
+                                    "Proprietà che rappresenta l'anno in cui è iniziato lo sviluppo di una particolare teoria."^^xsd:string ;
+                       rdfs:label "iniziata a sviluppare"@it ,
+                                  "started to develop"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#inizio_Periodo_Temporale
+:inizio_Periodo_Temporale rdf:type owl:DatatypeProperty ;
+                          owl:equivalentProperty <https://www.wikidata.org/wiki/Property:P580> ;
+                          rdf:type owl:FunctionalProperty ;
+                          rdfs:domain :Epoca ;
+                          rdfs:range xsd:dateTime ;
+                          rdfs:comment "Property that represents the year in which a certain epoch begins."^^xsd:string ,
+                                       "Proprietà che rappresenta l'anno in cui inizia una determinata epoca."^^xsd:string ;
+                          rdfs:label "inizia nell'anno"@it ,
+                                     "starts in the year"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#nazione_di_Nascita
+:nazione_di_Nascita rdf:type owl:DatatypeProperty ;
+                    owl:equivalentProperty <https://dbpedia.org/ontology/birthPlace> ,
+                                           <https://schema.org/birthPlace> ,
+                                           <https://www.wikidata.org/wiki/Property:P19> ;
+                    rdf:type owl:FunctionalProperty ;
+                    rdfs:domain :Personaggio ;
+                    rdfs:range xsd:string ;
+                    rdfs:comment "Property that represents the country of birth of a historical figure."^^xsd:string ,
+                                 "Proprietà che rappresenta la nazione di nascita di un personaggio storico."^^xsd:string ;
+                    rdfs:label "was born in"@en ,
+                               "è nato in"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#nome_Epoca
+:nome_Epoca rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Epoca ;
+            rdfs:range xsd:string ;
+            rdfs:comment "Property that represents the name by which a particular time interval in history has been named."^^xsd:string ,
+                         "Proprietà che rappresenta il nome con cui è stato denominato un particolare intervallo temporale nella storia."^^xsd:string ;
+            rdfs:label "epoca denominata"@it ,
+                       "epoch named"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#nome_Evento
+:nome_Evento rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Evento_scientifico ;
+             rdfs:range xsd:string ;
+             rdfs:comment "Property that represents the name assigned to a particular event."^^xsd:string ,
+                          "Proprietà che rappresenta il nome assegnato a un particolare evento."^^xsd:string ;
+             rdfs:label "event named"@en ,
+                        "evento denominato"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#nome_Oggetto
+:nome_Oggetto rdf:type owl:DatatypeProperty ;
+              rdfs:domain :Oggetto ;
+              rdfs:range xsd:string ;
+              rdfs:comment "Property that represents the name assigned to a particular object in the community."^^xsd:string ,
+                           "Proprietà che rappresenta il nome assegnato a un particolare oggetto nella comunità."^^xsd:string ;
+              rdfs:label "object named"@en ,
+                         "oggetto denominato"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#nome_Personaggio
+:nome_Personaggio rdf:type owl:DatatypeProperty ;
+                  owl:equivalentProperty <https://www.wikidata.org/wiki/Property:P1559> ;
+                  rdfs:domain :Personaggio ;
+                  rdfs:range xsd:string ;
+                  rdfs:comment "Property that represents the long name of the historical figure."^^xsd:string ,
+                               "Proprietà che rappresenta il nome esteso del personaggio storico."^^xsd:string ;
+                  rdfs:label "ha nome"@it ,
+                             "has name"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#nome_Principio
+:nome_Principio rdf:type owl:DatatypeProperty ;
+                rdfs:domain :Principio ;
+                rdfs:range xsd:string ;
+                rdfs:comment "Property indicating the name assigned to a particular principle."^^xsd:string ,
+                             "Proprietà che indica il nome assegnato a un determinato principio."^^xsd:string ;
+                rdfs:label "principio denominato"@it ,
+                           "principle named"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#nome_Teoria
+:nome_Teoria rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Teoria ;
+             rdfs:range xsd:string ;
+             rdfs:comment "Property that represents the name given to the theory."^^xsd:string ,
+                          "Proprietà che rappresenta il nome assegnato alla teoria."^^xsd:string ;
+             rdfs:label "teoria denominata"@it ,
+                        "theory named"@en .
+
+
+###  https://dbpedia.org/ontology/birthDate
+<https://dbpedia.org/ontology/birthDate> rdf:type owl:DatatypeProperty ;
+                                         rdfs:comment "Property that represents the date of birth of a historical figure."^^xsd:string ,
+                                                      "Proprietà che rappresenta la data di nascita di un personaggio storico."^^xsd:string ;
+                                         rdfs:isDefinedBy "https://dbpedia.org/"^^xsd:string ;
+                                         rdfs:label "was born (DBpedia)"@en ,
+                                                    "è nato in data (DBpedia)"@it .
+
+
+###  https://dbpedia.org/ontology/birthPlace
+<https://dbpedia.org/ontology/birthPlace> rdf:type owl:DatatypeProperty ;
+                                          rdfs:comment "Property that represents the country of birth of a historical figure."^^xsd:string ,
+                                                       "Proprietà che rappresenta la nazione di nascita di un personaggio storico."^^xsd:string ;
+                                          rdfs:isDefinedBy "https://dbpedia.org/"^^xsd:string ;
+                                          rdfs:label "was born in (DBpedia)"@en ,
+                                                     "è nato in (DBpedia)"@it .
+
+
+###  https://schema.org/birthDate
+<https://schema.org/birthDate> rdf:type owl:DatatypeProperty ;
+                               rdfs:comment "Property that represents the date of birth of a historical figure."^^xsd:string ,
+                                            "Proprietà che rappresenta la data di nascita di un personaggio storico."^^xsd:string ;
+                               rdfs:isDefinedBy "https://schema.org/"^^xsd:string ;
+                               rdfs:label "was born (schema.org)"@en ,
+                                          "è nato in data (schema.org)"@it .
+
+
+###  https://schema.org/birthPlace
+<https://schema.org/birthPlace> rdf:type owl:DatatypeProperty ;
+                                rdfs:comment "Property that represents the country of birth of a historical figure."^^xsd:string ,
+                                             "Proprietà che rappresenta la nazione di nascita di un personaggio storico."^^xsd:string ;
+                                rdfs:isDefinedBy "https://schema.org/"^^xsd:string ;
+                                rdfs:label "was born in (schema.org)"@en ,
+                                           "è nato in (schema.org)"@it .
+
+
+###  https://www.wikidata.org/wiki/Property:P1559
+<https://www.wikidata.org/wiki/Property:P1559> rdf:type owl:DatatypeProperty ;
+                                               rdfs:comment "Property that represents the long name of the historical figure."^^xsd:string ,
+                                                            "Proprietà che rappresenta il nome esteso del personaggio storico."^^xsd:string ;
+                                               rdfs:isDefinedBy "https://www.wikidata.org/"^^xsd:string ;
+                                               rdfs:label "ha nome (Wikidata)"@it ,
+                                                          "has name (Wikidata)"@en .
+
+
+###  https://www.wikidata.org/wiki/Property:P19
+<https://www.wikidata.org/wiki/Property:P19> rdf:type owl:DatatypeProperty ;
+                                             rdfs:comment "Property that represents the country of birth of a historical figure."^^xsd:string ,
+                                                          "Proprietà che rappresenta la nazione di nascita di un personaggio storico."^^xsd:string ;
+                                             rdfs:isDefinedBy "https://www.wikidata.org/"^^xsd:string ;
+                                             rdfs:label "was born in (Wikidata)"@en ,
+                                                        "è nato in (Wikidata)"@it .
+
+
+###  https://www.wikidata.org/wiki/Property:P569
+<https://www.wikidata.org/wiki/Property:P569> rdf:type owl:DatatypeProperty ;
+                                              rdfs:comment "Property that represents the date of birth of a historical figure."^^xsd:string ,
+                                                           "Proprietà che rappresenta la data di nascita di un personaggio storico."^^xsd:string ;
+                                              rdfs:isDefinedBy "https://www.wikidata.org/"^^xsd:string ;
+                                              rdfs:label "was born (Wikidata)"@en ,
+                                                         "è nato in data (Wikidata)"@it .
+
+
+###  https://www.wikidata.org/wiki/Property:P580
+<https://www.wikidata.org/wiki/Property:P580> rdf:type owl:DatatypeProperty ;
+                                              rdfs:comment "Property that represents the year in which a certain epoch begins."^^xsd:string ,
+                                                           "Proprietà che rappresenta l'anno in cui inizia una determinata epoca."^^xsd:string ;
+                                              rdfs:isDefinedBy "https://www.wikidata.org/"^^xsd:string ;
+                                              rdfs:label "inizia nell'anno (Wikidata)"@it ,
+                                                         "starts in the year (Wikidata)"@en .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://schema.org/Person
+<http://schema.org/Person> rdf:type owl:Class ;
+                           rdfs:isDefinedBy "http://schema.org/" ;
+                           rdfs:label "Person (schema.org)"@en ,
+                                      "Persona (schema.org)"@it .
+
+
+###  http://www.iconclass.org/rkd/23T/#
+<http://www.iconclass.org/rkd/23T/#> rdf:type owl:Class ;
+                                     owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                           owl:onProperty skos:exactMatch ;
+                                                           owl:someValuesFrom :Epoca
+                                                         ] ;
+                                     rdfs:comment "Epoche storiche nel thesauro ICONCLASS.org ." ,
+                                                  "Historical epochs in the ICONCLASS.org thesaurus" ;
+                                     rdfs:isDefinedBy "http://www.iconclass.org" ;
+                                     rdfs:label "Epoca (ICON)"@it ,
+                                                "Epoch (ICON)"@en .
+
+
+###  http://www.iconclass.org/rkd/49D/
+<http://www.iconclass.org/rkd/49D/> rdf:type owl:Class ;
+                                    owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                          owl:onProperty skos:narrowMatch ;
+                                                          owl:someValuesFrom :Matematico
+                                                        ] ,
+                                                        [ rdf:type owl:Restriction ;
+                                                          owl:onProperty skos:narrowMatch ;
+                                                          owl:someValuesFrom :Scienziato_matematico
+                                                        ] ;
+                                    rdfs:comment "Concepts related to mathematics in the ICONCLASS.org thesauro."^^xsd:string ,
+                                                 "Concetti legati alla matematica nel thesauro ICONCLASS.org."^^xsd:string ;
+                                    rdfs:isDefinedBy "http://www.iconclass.org" ;
+                                    rdfs:label "Matematica (ICON)"@it ,
+                                               "Mathematics (ICON)"@en .
+
+
+###  http://www.iconclass.org/rkd/49E11/
+<http://www.iconclass.org/rkd/49E11/> rdf:type owl:Class ;
+                                      owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                            owl:onProperty skos:broadMatch ;
+                                                            owl:someValuesFrom :Artefatto
+                                                          ] ;
+                                      rdfs:comment "Class defined in the ICONCLASS.org thesaurus and defines astronomical instruments used in astronomical research."^^xsd:string ,
+                                                   "Classe definita nel thesauro ICONCLASS.org e difnisce gli strumenti astronomici utilizzati nella ricerca astronomica."^^xsd:string ;
+                                      rdfs:isDefinedBy "http://www.iconclass.org" ;
+                                      rdfs:label "Astronomical instrument (ICON)"@en ,
+                                                 "Strumento astronomico (ICON)"@it .
+
+
+###  http://www.iconclass.org/rkd/49E13/
+<http://www.iconclass.org/rkd/49E13/> rdf:type owl:Class ;
+                                      owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                            owl:onProperty skos:broadMatch ;
+                                                            owl:someValuesFrom :Teoria
+                                                          ] ;
+                                      rdfs:comment "Class defined in the ICONCLASS.org thesaurus representing cosmological theories such as geocentric theory, heliocentric theory, etc."^^xsd:string ,
+                                                   "Classe definita nel thesauro ICONCLASS.org che rappresenta le teorie cosmologiche come la teoria geocentrica, teoria eliocentrica, ecc."^^xsd:string ;
+                                      rdfs:isDefinedBy "http://www.iconclass.org" ;
+                                      rdfs:label "Cosmological theory (ICON)"@en ,
+                                                 "Teoria cosmologica (ICON)"@it .
+
+
+###  http://www.iconclass.org/rkd/49E2/
+<http://www.iconclass.org/rkd/49E2/> rdf:type owl:Class ;
+                                     owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                           owl:onProperty skos:narrowMatch ;
+                                                           owl:someValuesFrom :Fisico
+                                                         ] ,
+                                                         [ rdf:type owl:Restriction ;
+                                                           owl:onProperty skos:narrowMatch ;
+                                                           owl:someValuesFrom :Scienziato_fisico
+                                                         ] ;
+                                     rdfs:comment "Classe del thesauro ICONCLASS.org che rappresenta la scienza fisica e le sue derivanti."^^xsd:string ,
+                                                  "ICONCLASS.org thesaurus class representing physical science and its derivatives."^^xsd:string ;
+                                     rdfs:isDefinedBy "http://www.iconclass.org" ;
+                                     rdfs:label "Fisica e meccanica (ICON)"@it ,
+                                                "Physics and mechanics (ICON)"@en .
+
+
+###  http://www.iconclass.org/rkd/49E3/
+<http://www.iconclass.org/rkd/49E3/> rdf:type owl:Class ;
+                                     owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                           owl:onProperty skos:narrowMatch ;
+                                                           owl:someValuesFrom :Chimico
+                                                         ] ,
+                                                         [ rdf:type owl:Restriction ;
+                                                           owl:onProperty skos:narrowMatch ;
+                                                           owl:someValuesFrom :Scienziato_chimico
+                                                         ] ;
+                                     rdfs:comment "Class defined in the ICONCLASS.org thesauro. It represents chemical science and its derivatives."^^xsd:string ,
+                                                  "Classe definita nel thesauro ICONCLASS.org. Essa rappresenta la scienza chimica e le sue derivate."^^xsd:string ;
+                                     rdfs:isDefinedBy "http://www.iconclass.org/" ;
+                                     rdfs:label "Chemistry (ICON)"@en ,
+                                                "Chimica (ICON)"@it .
+
+
+###  http://www.iconclass.org/rkd/49E9/
+<http://www.iconclass.org/rkd/49E9/> rdf:type owl:Class ;
+                                     owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                           owl:onProperty skos:narrowMatch ;
+                                                           owl:someValuesFrom :Esperimento
+                                                         ] ;
+                                     rdfs:comment "Class defined in the ICONCLASS.org thesauro which represents scientific experiments and tests."^^xsd:string ,
+                                                  "Classe definita nel thesauro ICONCLASS.org il quale rappresenta esperimenti e test scientifici."^^xsd:string ;
+                                     rdfs:isDefinedBy "http://www.iconclass.org" ;
+                                     rdfs:label "Esperimento (ICON)"@it ,
+                                                "Experiment (ICON)"@en .
+
+
+###  http://www.iconclass.org/rkd/61G/#
+<http://www.iconclass.org/rkd/61G/#> rdf:type owl:Class ;
+                                     owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                           owl:onProperty skos:narrowMatch ;
+                                                           owl:someValuesFrom :Artefatto
+                                                         ] ;
+                                     rdfs:comment "Names of artifacts and man-made objects on ICONCLASS.org"^^xsd:string ,
+                                                  "Nomi di manufatti e oggetti artificiali in ICONCLASS.org"^^xsd:string ;
+                                     rdfs:isDefinedBy "http://www.iconclass.org" ;
+                                     rdfs:label "Manufatto (ICON)"@it ,
+                                                "manufactured (ICON)"@en .
+
+
+###  http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#Collection
+<http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#Collection> rdfs:subClassOf :Entità_astratta ;
+                                                                               rdfs:comment """Qualsiasi contenitore per entità che condividono una o più proprietà comuni. Per esempio. \"oggetti di pietra\", \"le infermiere\", \"la collezione egizia del Louvre\". Una collezione non è una classe logica: una collezione è un'entità di primo ordine, mentre una classe è di secondo ordine.
+
+Meta-proprietà in OntoClean: 
+-> +O (una collezione ha un'identità in quanto riesco a identificare un insieme di oggetti come collezione)
+
+-> +U (una collezione è unitaria poiché posso descrivere le sue componenti una ad una )
+
+-> +R (una collezione è rigida poiché nasce come collezione e muore come collezione)
+
+-> -D (una collezione non dipende da altri oggetti)"""^^xsd:string ;
+                                                                               rdfs:label "Collezione"@it .
+
+
+###  http://www.ontologydesignpatterns.org/cp/owl/set.owl#Set
+<http://www.ontologydesignpatterns.org/cp/owl/set.owl#Set> rdfs:comment """Una collezione che non contiene elementi duplicati.
+
+Meta-proprietà in OntoClean: 
+-> +O (un insieme ha un'identità propria in quanto riesco a riconoscere se un gruppo di elementi distinti è un insieme o meno)
+
+-> +U (un insieme è unitario poiché posso descrivere le sue componenti una ad una )
+
+-> +R (un insieme è rigido poiché nasce come insieme e muore come insieme)
+
+-> -D (un insieme non dipende da altri oggetti)"""^^xsd:string ;
+                                                           rdfs:label "Insieme"@it .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Astratto
+dul:Astratto rdf:type owl:Class ;
+             owl:equivalentClass :Entità_astratta ;
+             rdfs:isDefinedBy "http://www.ontologydesignpatterns.org/ont/dul/DUL.owl"^^xsd:string ;
+             rdfs:label "Abstract (DUL)"@en ,
+                        "Astratto (DUL)"@it .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Evento
+dul:Evento rdf:type owl:Class ;
+           owl:equivalentClass :Evento ;
+           rdfs:isDefinedBy "http://www.ontologydesignpatterns.org/ont/dul/DUL.owl" ;
+           rdfs:label "Event (DUL)"@en ,
+                      "Evento (DUL)"@it .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Oggetto
+dul:Oggetto rdf:type owl:Class ;
+            owl:equivalentClass :Oggetto ;
+            rdfs:isDefinedBy "http://www.ontologydesignpatterns.org/ont/dul/DUL.owl" ;
+            rdfs:label "Object (DUL)"@en ,
+                       "Oggetto (DUL)"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Agente
+:Agente rdf:type owl:Class ;
+        rdfs:subClassOf :Oggetto ;
+        rdfs:comment """Comprende qualsiasi agente che ha un ruolo all'interno di un processo o evento.
+
+Meta-proprietà in OntoClean: 
+-> -I (agente non ha una proprietà intrinseca che lo identifica in maniera univoca, ma bensì dal processo a cui esso partecipa)
+
+-> -U (un agente può essere o meno unitario, ad esempio una persona è unitaria ma la pioggia non lo è ed entrambe possono partecipare a un processo)
+
+-> ~R (un agente cambia nel corso del tempo partecipando ad altri processi e modificando il suo stato di essere)
+
+-> +D (un agente dipende da altri oggetti per essere tale)"""^^xsd:string ,
+                     """It includes any agent that has a role within a process or event.
+
+Meta-properties in OntoClean:
+-> -I (agent does not have an intrinsic property that uniquely identifies it, but rather by the process in which it participates)
+
+-> -U (an agent may or may not be unitary, for example a person is unitary but rain is not and both can participate in a process)
+
+-> ~R (an agent changes over time by participating in other processes and changing his state of being)
+
+-> +D (an agent depends on other objects to be one)"""^^xsd:string ;
+        rdfs:label "Agent"@en ,
+                   "Agente"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Artefatto
+:Artefatto rdf:type owl:Class ;
+           owl:equivalentClass [ rdf:type owl:Restriction ;
+                                 owl:onProperty :èIdeatoDa ;
+                                 owl:someValuesFrom :Ruolo
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :artefattoUtilizzatoIn ;
+                                 owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                 owl:onClass :Esperimento
+                               ] ;
+           rdfs:subClassOf :Oggetto_fisico ;
+           rdfs:comment """Oggetto fisico inventato dall'uomo con uno scopo preciso. Tale classe descrive, ad esempio, tutti gli strumenti di misurazione inventati nel corso dei secoli o oggetti artificiali utiizzati per dimostrare o introdurre nuove teorie.
+
+Meta-proprietà in OntoClean: 
+-> -I (artefatto non ha una propria identità che lo rende tale, poiché non riesco a capire se presente in natura o creato dall'uomo a primo impatto)
+
+-> +U (un artefatto  è unitario banalmente poiché non infinito)
+
+-> +R (un artefatto nasce artefatto e muore artefatto)
+
+-> -D (un artefatto per essere tale non dipende da altri oggetti)"""^^xsd:string ,
+                        """Physical object invented by man with a specific purpose. This class describes, for example, all the measuring instruments invented over the centuries or artificial objects used to demonstrate or introduce new theories.
+
+Meta-properties in OntoClean:
+-> -I (artifact does not have its own identity that makes it such, since I cannot understand if it is present in nature or created by man at first glance)
+
+-> +U (an artifact is trivially unitary since it is not infinite)
+
+-> +R (an artifact is born an artifact and dies an artifact)
+
+-> -D (an artifact does not depend on other objects to be such)"""^^xsd:string ;
+           rdfs:label "Artefatto"@it ,
+                      "Artifact"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Astronomo
+:Astronomo rdf:type owl:Class ;
+           rdfs:subClassOf :Ruolo ;
+           rdfs:comment """A role that can be played by some significant historical figure in the science of astronomy. The role can be considered as a 'workplace' held by scholars to advance their studies in a certain sector.
+
+Meta-properties in OntoClean:
+-> + O (the astronomer role has its own identity as defined by the type of 'workplace')
+
+-> -U (the astronomer role is not unitary since parts or components cannot be established)
+
+-> ~ R (the role of astronomer can change over time, for example the role of astronomer may no longer be held by a person in the course of his life)
+
+-> -D (the astronomer role is independent of other objects)"""^^xsd:string ,
+                        """Ruolo che può essere interpretato da qualche personaggio storico rilevante nella scienza dell'astronomia. Il ruolo può essere considerato come un \"posto di lavoro\" tenuto da studiosi per avanzare gli studi in un determinato settore.
+
+Meta-proprietà in OntoClean: 
+-> +O (il ruolo astronomo ha una propria identità in quanto definito dal tipo di 'posto di lavoro')
+
+-> -U (il ruolo astronomo non è unitario poiché non si possono stabilire delle parti o componenti)
+
+-> ~R (il ruolo astronomo può cambiare nel corso del tempo, ad esempio il ruolo di astronomo può non essere più ricoperto da una persona nel corso della sua vita)
+
+-> -D (il ruolo astronomo è indipendente da altri oggetti)"""^^xsd:string ;
+           rdfs:label "Astronomer"@en ,
+                      "Astronomo"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Chimico
+:Chimico rdf:type owl:Class ;
+         rdfs:subClassOf :Ruolo ;
+         rdfs:comment """A role that can be played by some significant historical figure of chemistry. The role can be considered as a 'workplace' held by scholars to advance their studies in a certain sector.
+
+Meta-properties in OntoClean:
+-> +O (the chemical role has its own identity as it is defined by the type of 'workplace')
+
+-> -U (the chemical role is not unitary since parts or components cannot be established)
+
+-> ~R (the chemical role can change over time, for example the role of chemist may no longer be held by a person in the course of his life)
+
+-> -D (the chemical role is independent of other objects)"""^^xsd:string ,
+                      """Un ruolo che può essere svolto da qualche significativo personaggio storico della chimica. Il ruolo può essere considerato come un \"posto di lavoro\" tenuto da studiosi per avanzare gli studi in un determinato settore.
+
+Meta-proprietà in OntoClean: 
+-> +O (il ruolo chimico ha una propria identità in quanto definito dal tipo di 'posto di lavoro')
+
+-> -U (il ruolo chimico non è unitario poiché non si possono stabilire delle parti o componenti)
+
+-> ~R (il ruolo chimico può cambiare nel corso del tempo, ad esempio il ruolo di chimico può non essere più ricoperto da una persona nel corso della sua vita)
+
+-> -D (il ruolo chimico è indipendente da altri oggetti)"""^^xsd:string ;
+         rdfs:label "Chemist"@en ,
+                    "Chimico"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Cultore_filosofo
+:Cultore_filosofo rdf:type owl:Class ;
+                  owl:equivalentClass [ rdf:type owl:Restriction ;
+                                        owl:onProperty :haRuolo ;
+                                        owl:someValuesFrom [ owl:intersectionOf ( :Filosofo
+                                                                                  [ rdf:type owl:Class ;
+                                                                                    owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                                                    owl:onProperty :haScoperto ;
+                                                                                                    owl:someValuesFrom :Oggetto_naturale
+                                                                                                  ]
+                                                                                                  [ rdf:type owl:Restriction ;
+                                                                                                    owl:onProperty :haSistematizzato ;
+                                                                                                    owl:someValuesFrom :Principio
+                                                                                                  ]
+                                                                                                )
+                                                                                  ]
+                                                                                ) ;
+                                                             rdf:type owl:Class
+                                                           ]
+                                      ] ;
+                  rdfs:subClassOf :Personaggio ;
+                  rdfs:comment """A person relevant to the philosophical domain in any of its variants. Philosophy is a field of study that asks questions and reflects on the world and on the human being, investigates the meaning of human being and existence.
+
+Meta-properties in OntoClean:
+-> +O (Philosopher scholar has the characteristic of defining philosophical principles)
+
+-> +U (a philosopher has a unit since he is a person)
+
+-> +R (a philosopher is rigid in that he becomes a philosopher and a philosopher dies)
+
+-> +D (a philosopher to be a philosopher depends on the types of principles systematized)"""^^xsd:string ,
+                               """Un personaggio rilevante per il dominio filosofico in qualsiasi sua variante. La filosofia è un campo di studi che si pone domande e riflette sul mondo e sull'essere umano, indaga sul senso dell'essere e dell'esistenza umana.
+
+Meta-proprietà in OntoClean: 
+-> +O (Cultore filosofo ha la caratteristica di definire principi filosofici)
+
+-> +U (un cultore filosofo ha un'unità dato che è una persona)
+
+-> +R (un cultore filosofo è rigido in quanto diventi cultore filosofo e muori cultore filosofo)
+
+-> +D (un cultore filosofo per esserlo dipende dai tipi di principi sistematizzati)"""^^xsd:string ;
+                  rdfs:label "Cultore filosofo"@it ,
+                             "Expert philosopher"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Entità_astratta
+:Entità_astratta rdf:type owl:Class ;
+                 owl:disjointWith :Oggetto ;
+                 rdfs:comment """Entities that are formally defined and are considered independent from the social context in which they are used. They cannot be localized in space or time. Also called 'Platonic entities'.
+Mathematical and logical entities are included in this class: sets, categories, tuples, costants, variables, theories, principles, etc.
+
+Meta-properties in OntoClean:
+-> + O (an abstract entity is properly identified by the fact that it does not exist and is not tangible)
+
+-> -U (an abstract entity may or may not be unitary)
+
+-> +R (an abstract entity, once defined, cannot change)
+
+-> -D (an abstract entity, in general, may or may not depend on another object)"""^^xsd:string ,
+                              """Entità formalmente definite e considerate indipendenti dal contesto sociale in cui vengono utilizzate. Non possono essere localizzati nello spazio o nel tempo. Chiamate anche \"entità platoniche\".
+Le entità matematiche e logiche sono incluse in questa classe: insiemi, categorie, tuple, costanti, variabili, teorie, principi, ecc.
+
+Meta-proprietà in OntoClean: 
+-> +O (un'entità astratta viene identificata propriamente dal fatto di non esistere ed essere non tangibile)
+
+-> -U (un'entità astratta può essere o meno unitario)
+
+-> +R (un'entità astratta, una volta definita, non può cambiare )
+
+-> -D (un'entità astratta, in generale, può dipendere o meno da un altro oggetto)"""^^xsd:string ;
+                 rdfs:label "Abstract entity"@en ,
+                            "Entità astratta"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Epoca
+:Epoca rdf:type owl:Class ;
+       owl:equivalentClass [ rdf:type owl:Restriction ;
+                             owl:onProperty :precedeTemporalmente ;
+                             owl:someValuesFrom :Epoca
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :segueTemporalmente ;
+                             owl:someValuesFrom :Epoca
+                           ] ;
+       rdfs:comment """Conventional subdivision of time according to a particular discipline. There are no epochs in an absolute sense, but we can have epochs which include other intervals belonging to other epochs. An example of epochs to divide the scientific development into the physical field are: \"First civilization\", \"Hellenistic world\", \"Classical period\", \"Modern period\".
+
+Meta-properties in OntoClean:
+-> +O (epoch has the intrinsic property of having a beginning and an end in time)
+
+-> -U (an epoch is not a unitary type object since I cannot define its components in a definite and clear way)
+
+-> +R (an object of the epoch type is born as such and dies as such)
+
+-> +D (an epoch type object depends on the considered time interval)"""^^xsd:string ,
+                    """Suddivisione convenzionale del tempo secondo una particolare disciplina. Non esistono epoche in senso assoluto, ma possiamo avere epoche i quali intervalli comprendono altri intervalli appartenenti ad altre epoche. Un esempio di epoche per suddividere lo sviluppo scientifico in ambito fisico sono: \"Prima civiltà\", \"Mondo ellenistico\", \"Epoca classica\", \"Epoca moderna\".
+
+Meta-proprietà in OntoClean: 
+-> +O (epoca ha la proprietà instrinseca di avere un inizio e una fine temporale)
+
+-> -U (un'epoca non è un oggetto di tipo unitario poiché non riesco a definire le sue componenti in maniera definita e chiara)
+
+-> +R (un oggetto di tipo epoca nasce tale e muore tale)
+
+-> +D (un oggetto di tipo epoca dipende dall'invervallo temporale considerato)"""^^xsd:string ;
+       rdfs:label "Epoca"@it ,
+                  "Epoch"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Esperimento
+:Esperimento rdf:type owl:Class ;
+             owl:equivalentClass [ rdf:type owl:Class ;
+                                   owl:unionOf ( [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty :utilizzaOggetto ;
+                                                                          owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                          owl:onClass :Oggetto_naturale
+                                                                        ]
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty :utilizzaPrincipio ;
+                                                                          owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                          owl:onClass :Principio
+                                                                        ]
+                                                                      ) ;
+                                                   rdf:type owl:Class
+                                                 ]
+                                                 [ rdf:type owl:Restriction ;
+                                                   owl:onProperty :utilizzaStrumento ;
+                                                   owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                   owl:onClass :Artefatto
+                                                 ]
+                                               )
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :èSviluppatoDa ;
+                                   owl:someValuesFrom :Ruolo
+                                 ] ;
+             rdfs:subClassOf :Evento ;
+             rdfs:comment """An experiment is the implementation of an empirical operation aimed at confirming hypotheses or finding laws regarding a genome observable in any area of ​​knowledge.
+
+Meta-properties in OntoClean:
+-> -I (the experiment object cannot be uniquely classified through its properties)
+
+-> -U (an experiment has no unity, as it is composed of the participating actions and agents including a possible temporal component)
+
+-> +R (an experiment-type object is born and dies as such)
+
+-> +D (an experiment-type object depends on the actions, on the agents participating and possibly on a temporal component)"""^^xsd:string ,
+                          """Un esperimento è la realizzazione di un'operazione empirica atta a confermare ipotesi o trovare leggi riguardo un genomeno osservabile in qualunque area di conoscenza.
+
+Meta-proprietà in OntoClean: 
+-> -I (l'oggetto esperimento non si riesce a classificare univocamente tramite sue proprietà)
+
+-> -U (un esperimento non ha unità, in quanto è composto dalle azioni e dagli agenti che partecipano compresa una possibile componente temporale)
+
+-> +R (un oggetto di tipo esperimento nasce e muore tale)
+
+-> +D (un oggetto di tipo esperimento dipende dalle azioni, dagli agenti che partecipano e possibilmente da una componente temporale)"""^^xsd:string ;
+             rdfs:label "Esperimento"@it ,
+                        "Experiment"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Evento
+:Evento rdf:type owl:Class ;
+        owl:disjointWith :Oggetto ;
+        rdfs:comment """Any physical, social, or mental process, event, or state.
+
+More theoretically, events can be classified in different ways, possibly based on 'aspect' (e.g. stative, continuous, accomplishement, achievement, etc.), on 'agentivity' (e.g. intentional, natural, etc.), or on 'typical participants' (e.g. human, physical, abstract, food, etc.).
+Here no special direction is taken, and the following explains why: events are related to observable situations, and they can have different views at a same time.
+If a position has to be suggested here anyway, the participant-based classification of events seems the most stable and appropriate for many modelling problems.
+
+Meta-properties in OntoClean:
+-> + O (event has the intrinsic property of having a beginning and an end in time in which one or more processes take place)
+
+-> -U (an event has no unit since, in addition to the actions, it is composed of the time interval in which it is defined and the agents who participate)
+
+-> +R (an object of type event is born and dies such)
+
+-> +D (an event type object depends on the beginning and end of time in which it takes place, on the agents who participate and on the actions performed by the agents)"""^^xsd:string ,
+                     """Qualsiasi processo, evento o stato fisico, sociale o mentale.
+
+Più teoricamente, gli eventi possono essere classificati in modi diversi, possibilmente basati su 'aspetto' (es. statico, continuo, realizzazione, realizzazione, ecc.), su 'attività' (es. intenzionale, naturale, ecc.), o su 'partecipanti tipici' (es. umano, fisico, astratto, alimentare, ecc.).
+Qui non viene presa alcuna direzione speciale, e quanto segue spiega perché: gli eventi sono correlati a situazioni osservabili e possono avere punti di vista diversi allo stesso tempo.
+Se una posizione deve essere comunque suggerita qui, la classificazione degli eventi basata sui partecipanti sembra la più stabile e appropriata per molti problemi di modellazione.
+
+Meta-proprietà in OntoClean: 
+-> +O (evento ha la proprietà instrinseca di avere un inizio e una fine temporale nella quale si compiono uno o più processi)
+
+-> -U (un evento non ha unità in quanto, oltre alle azioni, è composto dall'intervallo di tempo in cui si definisce e dagli agenti che partecipano)
+
+-> +R (un oggetto di tipo evento nasce e muore tale)
+
+-> +D (un oggetto di tipo evento dipende dall'inizio e fine temporale in cui si svolge, dagli agenti che partecipano e dalle azioni svolte dagli agenti)"""^^xsd:string ;
+        rdfs:label "Event"@en ,
+                   "Evento"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Evento_scientifico
+:Evento_scientifico rdf:type owl:Class ;
+                    owl:equivalentClass [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty :causa ;
+                                                                 owl:someValuesFrom [ rdf:type owl:Class ;
+                                                                                      owl:unionOf ( :Epoca
+                                                                                                    :Evento
+                                                                                                  )
+                                                                                    ]
+                                                               ]
+                                                               [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty :causatoDa ;
+                                                                 owl:someValuesFrom :Personaggio
+                                                               ]
+                                                             ) ;
+                                          rdf:type owl:Class
+                                        ] ;
+                    rdfs:subClassOf :Evento ;
+                    rdfs:comment """A scientific event is an abstract event, useful for imagining a break between one era and another or to historically mark a relevant event in the history of the field of study analyzed. Usually a scientific event is caused by some relevant historical figure. An example is the first scientific revolution caused by 'Galileo Galilei' with the introduction of the 'scientific method', which marks a break between the era of the 'Hellenistic world' and the 'classical' era.
+
+Meta-properties in OntoClean:
+-> -I (scientific event has no intrinsic properties that identify it)
+
+-> -U (a scientific event has no unity as, in addition to the actions, it is composed of the time interval in which it is defined and the agents who participate)
+
+-> + R (a scientific event type object is born and dies as such)
+
+-> + D (a scientific event type object depends on the beginning and end of time in which it takes place, on the agents who participate and on the actions carried out by the agents)"""^^xsd:string ,
+                                 """Un evento scientifico è un evento astratto, utile a immaginare una rottura tra un'epoca e un'altra oppure per segnare storicamente un evento rilevante nella storia del campo di studi analizzato. Solitamente un evento scientifico viene causato da qualche personaggio storico rilevante. Un esempio è la prima rivoluzione scientifica causata da 'Galileo Galilei' con l'introduzione del 'metodo scientifico', il quale segna una rottura tra l'epoca del 'mondo ellenistico' e la epoca 'classica'.
+
+Meta-proprietà in OntoClean: 
+-> -I (evento scientifico non ha proprietà intrinseche che lo identificano)
+
+-> -U (un evento scientifico non ha unità in quanto, oltre alle azioni, è composto dall'intervallo di tempo in cui si definisce e dagli agenti che partecipano)
+
+-> +R (un oggetto di tipo evento scientifico nasce e muore tale)
+
+-> +D (un oggetto di tipo evento scientifico dipende dall'inizio e fine temporale in cui si svolge, dagli agenti che partecipano e dalle azioni svolte dagli agenti)"""^^xsd:string ;
+                    rdfs:label "Evento scientifico"@it ,
+                               "Scientific event"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Filosofo
+:Filosofo rdf:type owl:Class ;
+          rdfs:subClassOf :Ruolo ;
+          rdfs:comment """A role that can be played by some historical figure relevant to philosophical culture. The role can be considered as a 'workplace' held by scholars to advance their studies in a certain sector.
+
+Meta-properties in OntoClean:
+-> +O (the philosopher role has its own identity as defined by the type of 'workplace')
+
+-> -U (the philosopher role is not unitary since parts or components cannot be established)
+
+-> ~R (the philosopher role may change over time, for example the philosopher role may no longer be held by a person in the course of his life)
+
+-> -D (the philosopher role is independent of other objects)"""^^xsd:string ,
+                       """Ruolo che può essere interpretato da qualche personaggio storico rilevante nella cultura filosofica. Il ruolo può essere considerato come un \"posto di lavoro\" tenuto da studiosi per avanzare gli studi in un determinato settore.
+
+Meta-proprietà in OntoClean: 
+-> +O (il ruolo filosofo ha una propria identità in quanto definito dal tipo di 'posto di lavoro')
+
+-> -U (il ruolo filosofo non è unitario poiché non si possono stabilire delle parti o componenti)
+
+-> ~R (il ruolo filosofo può cambiare nel corso del tempo, ad esempio il ruolo di filosofo può non essere più ricoperto da una persona nel corso della sua vita)
+
+-> -D (il ruolo filosofo è indipendente da altri oggetti)"""^^xsd:string ;
+          rdfs:label "Filosofo"@it ,
+                     "Philosopher"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Filosofo_naturale
+:Filosofo_naturale rdf:type owl:Class ;
+                   owl:equivalentClass [ rdf:type owl:Restriction ;
+                                         owl:onProperty :haRuolo ;
+                                         owl:someValuesFrom [ owl:intersectionOf ( :Filosofo
+                                                                                   [ rdf:type owl:Class ;
+                                                                                     owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                                                     owl:onProperty :haScoperto ;
+                                                                                                     owl:someValuesFrom :Oggetto_naturale
+                                                                                                   ]
+                                                                                                   [ rdf:type owl:Restriction ;
+                                                                                                     owl:onProperty :haSistematizzato ;
+                                                                                                     owl:someValuesFrom [ owl:intersectionOf ( :Principio
+                                                                                                                                               [ rdf:type owl:Restriction ;
+                                                                                                                                                 owl:onProperty :èParteDi ;
+                                                                                                                                                 owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                                                                                                 owl:onClass [ owl:intersectionOf ( :Teoria
+                                                                                                                                                                                    [ rdf:type owl:Restriction ;
+                                                                                                                                                                                      owl:onProperty :haContributore ;
+                                                                                                                                                                                      owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                                                                                                                                      owl:onClass :Scienziato_fisico
+                                                                                                                                                                                    ]
+                                                                                                                                                                                  ) ;
+                                                                                                                                                               rdf:type owl:Class
+                                                                                                                                                             ]
+                                                                                                                                               ]
+                                                                                                                                             ) ;
+                                                                                                                          rdf:type owl:Class
+                                                                                                                        ]
+                                                                                                   ]
+                                                                                                 )
+                                                                                   ]
+                                                                                 ) ;
+                                                              rdf:type owl:Class
+                                                            ]
+                                       ] ;
+                   rdfs:subClassOf :Cultore_filosofo ;
+                   rdfs:comment """Personaggi rilevanti nella filosofia naturale o filosofia della natura, conosciuta in latino come philosophia naturalis, che consiste nella riflessione filosofica applicata allo studio della natura.
+
+Meta-proprietà in OntoClean: 
+-> +O (Filosofo naturale ha la caratteristica di definire principi filosofici riguardante la natura)
+
+-> +U (un filosofo naturale ha un'unità dato che è una persona)
+
+-> +R (un filosofo naturale è rigido in quanto diventi filosofo naturale e muori filosofo naturale)
+
+-> +D (un filosofo naturale per esserlo dipende dai tipi di principi sistematizzati)"""^^xsd:string ,
+                                """Relevant characters in natural philosophy or philosophy of nature, known in Latin as philosophia naturalis, which consists in philosophical reflection applied to the study of nature.
+
+Meta-properties in OntoClean:
+-> +O (Natural philosopher has the characteristic of defining philosophical principles concerning nature)
+
+-> +U (a natural philosopher has a unity since he is a person)
+
+-> +R (a natural philosopher is rigid in that he becomes a natural philosopher and dies a natural philosopher)
+
+-> +D (a natural philosopher to be depends on the types of principles systematized)"""^^xsd:string ;
+                   rdfs:label "Filosofo naturale"@it ,
+                              "Natural philosopher"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Fisico
+:Fisico rdf:type owl:Class ;
+        rdfs:subClassOf :Ruolo ;
+        rdfs:comment """A role that can be played by some historical figure relevant to physics. The role can be considered as a 'workplace' held by scholars to advance their studies in a certain sector.
+
+Meta-properties in OntoClean:
+-> +O (the physical role has its own identity as defined by the type of 'workplace')
+
+-> -U (the physical role is not unitary since parts or components cannot be established)
+
+-> ~R (the physical role may change over time, for example the physical role may no longer be held by a person in the course of his life)
+
+-> -D (the physical role is independent of other objects)"""^^xsd:string ,
+                     """Un ruolo che può essere svolto da qualche personaggio storico rilevante per la fisica. Il ruolo può essere considerato come un \"posto di lavoro\" tenuto da studiosi per avanzare gli studi in un determinato settore.
+
+Meta-proprietà in OntoClean: 
+-> +O (il ruolo fisico ha una propria identità in quanto definito dal tipo di 'posto di lavoro')
+
+-> -U (il ruolo fisico non è unitario poiché non si possono stabilire delle parti o componenti)
+
+-> ~R (il ruolo fisico può cambiare nel corso del tempo, ad esempio il ruolo di fisico può non essere più ricoperto da una persona nel corso della sua vita)
+
+-> -D (il ruolo fisico è indipendente da altri oggetti)"""^^xsd:string ;
+        rdfs:label "Fisico"@it ,
+                   "Physicist"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Matematico
+:Matematico rdf:type owl:Class ;
+            rdfs:subClassOf :Ruolo ;
+            rdfs:comment """A role that can be played by some historical figure relevant to mathematics. The role can be considered as a 'workplace' held by scholars to advance their studies in a certain sector.
+
+Meta-properties in OntoClean:
+-> +O (the mathematical role has its own identity as defined by the type of 'workplace')
+
+-> -U (the mathematical role is not unitary since parts or components cannot be established)
+
+-> ~R (the role of mathematician may change over time, for example the role of mathematician may no longer be held by a person in the course of his life)
+
+-> -D (the mathematical role is independent of other objects)"""^^xsd:string ,
+                         """Un ruolo che può essere svolto da qualche personaggio storico rilevante per la matematica. Il ruolo può essere considerato come un \"posto di lavoro\" tenuto da studiosi per avanzare gli studi in un determinato settore.
+
+Meta-proprietà in OntoClean: 
+-> +O (il ruolo matematico ha una propria identità in quanto definito dal tipo di 'posto di lavoro')
+
+-> -U (il ruolo matematico non è unitario poiché non si possono stabilire delle parti o componenti)
+
+-> ~R (il ruolo matematico può cambiare nel corso del tempo, ad esempio il ruolo di matematico può non essere più ricoperto da una persona nel corso della sua vita)
+
+-> -D (il ruolo matematico è indipendente da altri oggetti)"""^^xsd:string ;
+            rdfs:label "Matematico"@it ,
+                       "Mathematic"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Oggetto
+:Oggetto rdf:type owl:Class ;
+         rdfs:comment """A real and concrete object can be anything that is visible, tangible and locatable in space. For example, object or agent.
+
+Meta-properties in OntoClean:
+-> +O (object has its own identity given by the fact of being tangible)
+
+-> +U (an object is trivially unitary since it is not infinite)
+
+-> +R (an object is born a physical object and an object dies)
+
+-> -D (an object to be such does not depend on other objects)"""^^xsd:string ,
+                      """Un oggetto reale e concreto, può essere tutto ciò che è visibile, tangibile e locabile nello spazio.
+
+Meta-proprietà in OntoClean: 
+-> +O (oggetto ha una propria identità data dal fatto di essere tangibile)
+
+-> +U (un oggetto è unitario banalmente poiché non infinito)
+
+-> +R (un oggetto nasce oggetto fisico e muore oggetto)
+
+-> -D (un oggetto per essere tale non dipende da altri oggetti)"""^^xsd:string ;
+         rdfs:label "Object"@en ,
+                    "Oggetto"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Oggetto_fisico
+:Oggetto_fisico rdf:type owl:Class ;
+                rdfs:subClassOf :Oggetto ;
+                rdfs:comment """Any inanimate or animated object that is used for the scientific and literary domain, or in general in the arts. This class does not include agents.
+
+Meta-properties in OntoClean:
+-> +O (physical object has its own identity given by the fact of being tangible)
+
+-> +U (a physical object is trivially unitary since it is not infinite)
+
+-> +R (a physical object is born a physical object and a physical object dies)
+
+-> -D (a physical object does not depend on other objects to be such)"""^^xsd:string ,
+                             """Qualsiasi oggetto inanimato o animato che viene utilizzato per il dominio scientifico e letterario, o in generale nelle arti. Questa classe non comprende gli agenti.
+
+Meta-proprietà in OntoClean: 
+-> +O (oggetto fisico ha una propria identità data dal fatto di essere tangibile)
+
+-> +U (un oggetto fisico è unitario banalmente poiché non infinito)
+
+-> +R (un oggetto fisico nasce oggetto fisico e muore oggetto fisico)
+
+-> -D (un oggetto fisico per essere tale non dipende da altri oggetti)"""^^xsd:string ;
+                rdfs:label "Oggetto fisico"@it ,
+                           "Physical object"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Oggetto_naturale
+:Oggetto_naturale rdf:type owl:Class ;
+                  owl:equivalentClass [ rdf:type owl:Class ;
+                                        owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                        owl:onProperty :oggettoUtilizzatoIn ;
+                                                        owl:someValuesFrom :Esperimento
+                                                      ]
+                                                      [ rdf:type owl:Restriction ;
+                                                        owl:onProperty :oggettoUtilizzatoIn ;
+                                                        owl:someValuesFrom :Principio
+                                                      ]
+                                                    )
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty :èScopertoDa ;
+                                        owl:someValuesFrom :Ruolo
+                                      ] ;
+                  rdfs:subClassOf :Oggetto_fisico ;
+                  rdfs:comment """A physical object found in nature. This class excludes man-made artifacts, but includes everything that may be relevant to the scientific, artistic, literary, etc. domain.
+
+Meta-properties in OntoClean:
+-> -I (natural object does not have its own identity that makes it such, since I cannot understand if it is present in nature or created by man at first glance)
+
+-> +U (a natural object is trivially unitary since it is not infinite)
+
+-> +R (a natural object is born an artifact and dies an artifact)
+
+-> -D (a natural object to be such does not depend on other objects)"""^^xsd:string ,
+                               """Un oggetto fisico trovato in natura. Questa classe esclude artefatti creati dall'uomo, ma comprende tutto ciò che può risultare rilevante per il dominio scientifico, artistico, letterario, ecc.
+
+Meta-proprietà in OntoClean: 
+-> -I (oggetto naturale non ha una propria identità che lo rende tale, poiché non riesco a capire se presente in natura o creato dall'uomo a primo impatto)
+
+-> +U (un oggetto naturale è unitario banalmente poiché non infinito)
+
+-> +R (un oggetto naturale nasce artefatto e muore artefatto)
+
+-> -D (un oggetto naturale per essere tale non dipende da altri oggetti)"""^^xsd:string ;
+                  rdfs:label "Natural object"@en ,
+                             "Oggetto naturale"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Personaggio
+:Personaggio rdf:type owl:Class ;
+             rdfs:subClassOf <http://schema.org/Person> ;
+             rdfs:comment """A character is a relevant agent in the story for having systematized, invented or discovered some abstract object or entity.
+Meta-properties in OntoClean:
+-> +O (Character has his own identity derived from the fact that he is human and is lived)
+
+-> +U (a character being a person is unitary)
+
+-> +R (a character is rigid as a person is born and a person dies)
+
+-> -D (a character does not depend on other objects to be a character)"""^^xsd:string ,
+                          """Un personaggio è un agente rilevante nella storia per aver sistematizzato, inventato o scoperto qualche oggetto o entità astratta.
+
+Meta-proprietà in OntoClean: 
+-> +O (Personaggio ha una propria identità derivato dal fatto che è umano ed è vissuto)
+
+-> +U (un personaggio essendo una persona è unitario)
+
+-> +R (un personaggio è rigido poiché nasce persona e muore persona )
+
+-> -D (un personaggio non dipende da altri oggetti per essere personaggio)"""^^xsd:string ;
+             rdfs:label "Character"@en ,
+                        "Personaggio"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Principio
+:Principio rdf:type owl:Class ;
+           owl:equivalentClass [ rdf:type owl:Restriction ;
+                                 owl:onProperty :principioUtilizzatoIn ;
+                                 owl:someValuesFrom :Esperimento
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :èSistematizzatoDa ;
+                                 owl:someValuesFrom :Ruolo
+                               ] ;
+           rdfs:subClassOf :Entità_astratta ;
+           rdfs:comment """A principle is a concept that indicates the bases and initial assumptions on which a theory is based or rests and which right, by convention or recognized, is general and universal validity within the theory itself.
+
+Meta-properties in OntoClean:
+-> -I (a principle does not have its own identity that identifies it)
+
+-> -U (a principle does not have a unit as I cannot classify its components)
+
+-> +R (a principle is born such and dies such)
+
+-> +D (a principle depends on the subject in which it is defining, it could happen that the description of a principle depends on the point of view with which it is systematizing, for example a philosophical or physical point of view)"""^^xsd:string ,
+                        """Un principio è un concetto che indica le basi e i presupposti iniziali su cui si basa o poggia una teoria e che assumono, per convenzione o riconosciuto diritto, validità generale ed universale all'interno della teoria stessa.
+
+Meta-proprietà in OntoClean: 
+-> -I (un principio non ha una propria identità che lo identifica)
+
+-> -U (un principio non ha un'unità in quanto non riesco a classificare le sue componenti)
+
+-> +R (un principio nasce tale e muore tale)
+
+-> +D (un principio dipende dalla materia in cui si sta definendo, potrebbe succedere che la descrizione di un principio dipende dal punto di vista con cui si sta sistematizzando, ad esempio punto di vista filosofico o fisico)"""^^xsd:string ;
+           rdfs:label "Principio"@it ,
+                      "Principles"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Ruolo
+:Ruolo rdf:type owl:Class ;
+       rdfs:comment """A role assigned to a character or object in general in participating in some event, process or creation of abstract entities or physical objects.
+An example is 'Galileo Galilei' in the role of 'Physicist' conceived the 'fall of the grave' experiment.
+
+Meta-properties in OntoClean:
+-> +O (role has its own identity as defined by the type of 'workplace')
+
+-> -U (a role is not unitary since parts or components cannot be established)
+
+-> ~R (a role may change over time, for example the role of astronomer may no longer be held by a person in the course of his life)
+
+-> -D (a role is independent of other objects)"""^^xsd:string ,
+                    """Un ruolo assegnato a un personaggio o un oggetto in generale nella partecipazione a qualche evento, processo o creazione di entità astratte o oggetti fisici. 
+Un esempio è 'Galileo Galilei' nel ruolo di 'Fisico' ha ideato l'esperimento 'caduta del grave'.
+
+Meta-proprietà in OntoClean: 
+-> +O (ruolo ha una propria identità in quanto definito dal tipo di 'posto di lavoro')
+
+-> -U (un ruolo non è unitario poiché non si possono stabilire delle parti o componenti)
+
+-> ~R (un ruolo può cambiare nel corso del tempo, ad esempio il ruolo di astronomo può non essere più ricoperto da una persona nel corso della sua vita)
+
+-> -D (un ruolo è indipendente da altri oggetti)"""^^xsd:string ;
+       rdfs:label "Role"@en ,
+                  "Ruolo"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Scienziato_astronomo
+:Scienziato_astronomo rdf:type owl:Class ;
+                      owl:equivalentClass [ rdf:type owl:Restriction ;
+                                            owl:onProperty :haRuolo ;
+                                            owl:someValuesFrom [ owl:intersectionOf ( :Astronomo
+                                                                                      [ rdf:type owl:Class ;
+                                                                                        owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                                                        owl:onProperty :haIdeato ;
+                                                                                                        owl:someValuesFrom :Artefatto
+                                                                                                      ]
+                                                                                                      [ rdf:type owl:Restriction ;
+                                                                                                        owl:onProperty :haScoperto ;
+                                                                                                        owl:someValuesFrom :Oggetto_naturale
+                                                                                                      ]
+                                                                                                      [ rdf:type owl:Restriction ;
+                                                                                                        owl:onProperty :haSistematizzato ;
+                                                                                                        owl:someValuesFrom :Principio
+                                                                                                      ]
+                                                                                                      [ rdf:type owl:Restriction ;
+                                                                                                        owl:onProperty :haSviluppato ;
+                                                                                                        owl:someValuesFrom :Esperimento
+                                                                                                      ]
+                                                                                                    )
+                                                                                      ]
+                                                                                    ) ;
+                                                                 rdf:type owl:Class
+                                                               ]
+                                          ] ;
+                      rdfs:subClassOf :Personaggio ,
+                                      modsci:Scientist ;
+                      rdfs:comment """An astronomer is a scientist who deals with the study of bodies and phenomena external to the earth's atmosphere. This class includes astronomers relevant to their discoveries.
+
+Meta-properties in OntoClean:
+-> +O (Scientist astronomer has the characteristic of designing tools, discovering artifacts, systematizing principles and developing experiments on astronomy)
+
+-> +U (an astronomer scientist has a unit since he is a person)
+
+-> +R (an astronomer scientist is rigid in that you become an astronomer scientist and die as an astronomer scientist)
+
+-> +D (an astronomer scientist depends on the tools devised, the artifacts discovered, the principles systematized and the experiments developed)"""^^xsd:string ,
+                                   """Un cultore astronomo è uno scienziato che si occupa dello studio dei corpi e dei fenomeni esterni all'atmosfera terrestre. Questa classe include astronomi rilevanti per le loro scoperte.
+
+Meta-proprietà in OntoClean: 
+-> +O (Scienziato astronomo ha la caratteristica di ideare strumenti, scoprire artefatti, sistematizzare principi e sviluppare esperimenti in merito all'astronomia)
+
+-> +U (uno scienziato astronomo ha un'unità dato che è una persona)
+
+-> +R (uno scienziato astronomo è rigido in quanto diventi scienziato astronomo e muori scienziato astronomo)
+
+-> +D (uno scienziato astronomo dipende dagli strumenti ideati, dagli artefatti scoperti, dai principi sistematizzati e dagli esperimenti sviluppati)"""^^xsd:string ;
+                      rdfs:label "Astronomer scientist"@en ,
+                                 "Scienziato astronomo"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Scienziato_chimico
+:Scienziato_chimico rdf:type owl:Class ;
+                    owl:equivalentClass [ rdf:type owl:Restriction ;
+                                          owl:onProperty :haRuolo ;
+                                          owl:someValuesFrom [ owl:intersectionOf ( :Chimico
+                                                                                    [ rdf:type owl:Class ;
+                                                                                      owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                                                      owl:onProperty :haIdeato ;
+                                                                                                      owl:someValuesFrom :Artefatto
+                                                                                                    ]
+                                                                                                    [ rdf:type owl:Restriction ;
+                                                                                                      owl:onProperty :haScoperto ;
+                                                                                                      owl:someValuesFrom :Oggetto_naturale
+                                                                                                    ]
+                                                                                                    [ rdf:type owl:Restriction ;
+                                                                                                      owl:onProperty :haSistematizzato ;
+                                                                                                      owl:someValuesFrom :Principio
+                                                                                                    ]
+                                                                                                    [ rdf:type owl:Restriction ;
+                                                                                                      owl:onProperty :haSviluppato ;
+                                                                                                      owl:someValuesFrom :Esperimento
+                                                                                                    ]
+                                                                                                  )
+                                                                                    ]
+                                                                                  ) ;
+                                                               rdf:type owl:Class
+                                                             ]
+                                        ] ;
+                    rdfs:subClassOf :Personaggio ,
+                                    modsci:Scientist ;
+                    rdfs:comment """A chemist is a scientist trained in the study of chemistry. Chemists study the composition of matter and its properties. This class includes chemists relevant to their discoveries.
+
+Meta-properties in OntoClean:
+-> +O (Chemical scientist has the characteristic of devising tools, discovering artifacts, systematizing principles and developing experiments on chemistry in general)
+
+-> +U (a chemical scientist has a unit since he is a person)
+
+-> +R (a chemical scientist is strict as you become a chemical scientist and die a chemical scientist)
+
+-> +D (a chemical scientist depends on the tools devised, the artifacts discovered, the principles systematized and the experiments developed)"""^^xsd:string ,
+                                 """Un chimico è uno scienziato impiegato nello studio della chimica. I chimici studiano la composizione della materia e le sue proprietà. Questa classe include chimici rilevanti per le loro scoperte.
+
+Meta-proprietà in OntoClean: 
+-> +O (Scienziato chimico ha la caratteristica di ideare strumenti, scoprire artefatti, sistematizzare principi e sviluppare esperimenti in merito alla chimica in generale)
+
+-> +U (uno scienziato chimico ha un'unità dato che è una persona)
+
+-> +R (uno scienziato chimico è rigido in quanto diventi scienziato chimico e muori scienziato chimico)
+
+-> +D (uno scienziato chimico dipende dagli strumenti ideati, dagli artefatti scoperti, dai principi sistematizzati e dagli esperimenti sviluppati)"""^^xsd:string ;
+                    rdfs:label "Chemical scientist"@en ,
+                               "Scienziato chimico"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Scienziato_fisico
+:Scienziato_fisico rdf:type owl:Class ;
+                   owl:equivalentClass [ rdf:type owl:Restriction ;
+                                         owl:onProperty :haRuolo ;
+                                         owl:someValuesFrom [ owl:intersectionOf ( :Fisico
+                                                                                   [ rdf:type owl:Class ;
+                                                                                     owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                                                     owl:onProperty :haIdeato ;
+                                                                                                     owl:someValuesFrom :Artefatto
+                                                                                                   ]
+                                                                                                   [ rdf:type owl:Restriction ;
+                                                                                                     owl:onProperty :haScoperto ;
+                                                                                                     owl:someValuesFrom :Oggetto_naturale
+                                                                                                   ]
+                                                                                                   [ rdf:type owl:Restriction ;
+                                                                                                     owl:onProperty :haSistematizzato ;
+                                                                                                     owl:someValuesFrom :Principio
+                                                                                                   ]
+                                                                                                   [ rdf:type owl:Restriction ;
+                                                                                                     owl:onProperty :haSviluppato ;
+                                                                                                     owl:someValuesFrom :Esperimento
+                                                                                                   ]
+                                                                                                 )
+                                                                                   ]
+                                                                                 ) ;
+                                                              rdf:type owl:Class
+                                                            ]
+                                       ] ;
+                   rdfs:subClassOf :Personaggio ,
+                                   modsci:Scientist ;
+                   rdfs:comment """A scientist who deals with physics, is a person who studies the physical phenomena of nature. This class includes physicists relevant to their discoveries.
+
+Meta-properties in OntoClean:
+-> +O (Physicist has the characteristic of devising tools, discovering artifacts, systematizing principles and developing experiments on physics in general)
+
+-> +U (a physical scientist has a unit since he is a person)
+
+-> +R (a physical scientist is strict as you become a physical scientist and die a physical scientist)
+
+-> +D (a physical scientist depends on the tools devised, the artifacts discovered, the principles systematized and the experiments developed)"""^^xsd:string ,
+                                """Uno scienziato che si occupa della fisica, è una persona che studia i fenomeni fisici della natura. Questa classe include fisici rilevanti per le loro scoperte.
+
+Meta-proprietà in OntoClean: 
+-> +O (Scienziato fisico ha la caratteristica di ideare strumenti, scoprire artefatti, sistematizzare principi e sviluppare esperimenti in merito alla fisica in generale)
+
+-> +U (uno scienziato fisico ha un'unità dato che è una persona)
+
+-> +R (uno scienziato fisico è rigido in quanto diventi scienziato fisico e muori scienziato fisico)
+
+-> +D (uno scienziato fisico dipende dagli strumenti ideati, dagli artefatti scoperti, dai principi sistematizzati e dagli esperimenti sviluppati)"""^^xsd:string ;
+                   rdfs:label "Physical scientist"@en ,
+                              "Scienziato fisico"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Scienziato_matematico
+:Scienziato_matematico rdf:type owl:Class ;
+                       owl:equivalentClass [ rdf:type owl:Restriction ;
+                                             owl:onProperty :haRuolo ;
+                                             owl:someValuesFrom [ owl:intersectionOf ( :Matematico
+                                                                                       [ rdf:type owl:Restriction ;
+                                                                                         owl:onProperty :haSistematizzato ;
+                                                                                         owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                                         owl:onClass :Principio
+                                                                                       ]
+                                                                                     ) ;
+                                                                  rdf:type owl:Class
+                                                                ]
+                                           ] ;
+                       rdfs:subClassOf :Personaggio ,
+                                       modsci:Scientist ;
+                       rdfs:comment """Class representing historical figures relevant to the study of mathematics. This class includes mathematicians relevant to their discoveries.
+
+Meta-properties in OntoClean:
+-> +O (Mathematician scientist has the characteristic of systematizing principles regarding mathematics in general)
+
+-> +U (a mathematical scientist has a unit since he is a person)
+
+-> +R (a mathematical scientist is rigid in that you become a mathematical scientist and die a mathematician scientist)
+
+-> +D (a mathematical scientist depends on systematized principles)"""^^xsd:string ,
+                                    """Classe che rappresenta personaggi storici rilevanti nello studio della matematica. Questa classe include matematici rilevanti per le loro scoperte.
+
+Meta-proprietà in OntoClean: 
+-> +O (Scienziato matematico ha la caratteristica di sistematizzare principi in merito alla matematica in generale)
+
+-> +U (uno scienziato matematico ha un'unità dato che è una persona)
+
+-> +R (uno scienziato matematico è rigido in quanto diventi scienziato matematico e muori scienziato matematico)
+
+-> +D (uno scienziato matematico dipende dai principi sistematizzati)"""^^xsd:string ;
+                       rdfs:label "Mathematician scientist"@en ,
+                                  "Scienziato matematico"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Teoria
+:Teoria rdf:type owl:Class ;
+        owl:equivalentClass [ rdf:type owl:Class ;
+                              owl:unionOf ( [ rdf:type owl:Restriction ;
+                                              owl:onProperty :èCompostoDa ;
+                                              owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                              owl:onClass :Principio
+                                            ]
+                                            [ rdf:type owl:Restriction ;
+                                              owl:onProperty :èCompostoDa ;
+                                              owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                              owl:onClass :Teoria
+                                            ]
+                                          )
+                            ] ;
+        rdfs:subClassOf <http://www.ontologydesignpatterns.org/cp/owl/set.owl#Set> ,
+                        :Entità_astratta ;
+        rdfs:comment """In science, a theory is an interconnected set of hypotheses, statements and prepositions with the general purpose of explaining natural phenomena or systematically formulating the principles of a discipline.
+
+Meta-properties in OntoClean:
+-> -I (a theory has no identifying properties)
+
+-> +U (a theory has a unit because I can describe the principles that compose it)
+
+-> +R (a theory is born as a theory and dies as a theory)
+
+-> -D (a theory does not depend on other entities)"""^^xsd:string ,
+                     """Nella scienza, una teoria è un insieme interconnesso di ipotesi, enunciati e preposizioni con lo scopo in genere di spiegare fenomeni naturali o formulare sistematicamente i principi di una disciplina.
+
+Meta-proprietà in OntoClean: 
+-> -I (una teoria non ha proprietà che la identificano)
+
+-> +U (una teoria ha un'unità perché riesco a descrivere i principi che la compongono)
+
+-> +R (una teoria nasce come teoria e muore come teoria)
+
+-> -D (una teoria non dipende da altre entità)"""^^xsd:string ;
+        rdfs:label "Teoria"@it ,
+                   "Theory"@en .
+
+
+###  https://w3id.org/skgo/modsci#ScientificInstrument
+modsci:ScientificInstrument rdf:type owl:Class ;
+                            rdfs:subClassOf :Artefatto ;
+                            rdfs:isDefinedBy "https://w3id.org/skgo/modsci" ;
+                            rdfs:label "Scientific Instrument (ModSci)"@en ,
+                                       "Strumento scientifico (ModSci)"@it .
+
+
+###  https://w3id.org/skgo/modsci#Scientist
+modsci:Scientist rdf:type owl:Class ;
+                 rdfs:isDefinedBy "https://w3id.org/skgo/modsci" ;
+                 rdfs:label "Scientist (ModSci)"@en ,
+                            "Scienziato (ModSci)"@it .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://viaf.org/viaf/22146457
+<http://viaf.org/viaf/22146457> rdf:type owl:NamedIndividual ;
+                                owl:sameAs :Isaac_Newton ;
+                                rdfs:comment "Sir Isaac Newton was an English mathematician, physicist, astronomer, theologian, widely recognized as one of the greatest mathematicians and physicists of all time and among the most influential scientists."^^xsd:string ,
+                                             "Sir Isaac Newton è stato un matematico, fisico, astronomo, teologo inglese, ampiamente riconosciuto come uno dei più grandi matematici e fisici di tutti i tempi e tra gli scienziati più influenti."^^xsd:string ;
+                                rdfs:label "Isaac Newton (VIAF)"@en ,
+                                           "Isaac Newton (VIAF)"@it .
+
+
+###  http://viaf.org/viaf/2470550
+<http://viaf.org/viaf/2470550> rdf:type owl:NamedIndividual ;
+                               owl:sameAs :Galileo_Galilei ;
+                               rdfs:label "Galileo Galilei (VIAF)"@it ,
+                                          "Galileo Galilei was a physicist, astronomer, philosopher, mathematician considered the father of modern science. Key figure of the scientific revolution."^^xsd:string ,
+                                          "Galileo Galilei è stato un fisico, astronomo, fllosofo, matematico considerato il padre della scienza moderna. Personaggio chiave della rivoluzione scientifica."^^xsd:string ,
+                                          "Galileo di Vincenzo Bonaiuti de' Galilei (VIAF)"@en .
+
+
+###  http://viaf.org/viaf/2495579
+<http://viaf.org/viaf/2495579> rdf:type owl:NamedIndividual ;
+                               owl:sameAs :Antoine_Lavoisier ;
+                               rdfs:comment "Lavoisier was a French chemist, biologist, philosopher and economist. He was one of the most important figures in the history of science above all for having enunciated the law of conservation of mass in 1789."^^xsd:string ,
+                                            "Lavoisier è stato un chimico, biologo, filosofo ed economista francese. Fu uno dei più importanti personaggi della storia della scienza soprattuto per aver enunciato la legge di conservazione della massa nel 1789."^^xsd:string ;
+                               rdfs:label "Antoine Lavoisier (VIAF)"@en ,
+                                          "Antoine-Laurent de Lavoisier (VIAF)"@it .
+
+
+###  http://viaf.org/viaf/41838958
+<http://viaf.org/viaf/41838958> rdf:type owl:NamedIndividual ;
+                                owl:sameAs :Cartesio ;
+                                rdfs:comment "Cartesio è stato un filosofo e matematico francese, fra i pincipai fondatori della matematica e della filosofia moderna."^^xsd:string ,
+                                             "Descartes was a French philosopher and mathematician, one of the founding princes of modern mathematics and philosophy."^^xsd:string ;
+                                rdfs:label "Cartesio (VIAF)"@it ,
+                                           "René Descartes (VIAF)"@en .
+
+
+###  http://viaf.org/viaf/71389288
+<http://viaf.org/viaf/71389288> rdf:type owl:NamedIndividual ;
+                                owl:sameAs :Niccolò_Copernico ;
+                                rdfs:comment "Niccolò Copernico è stato un astronomo, matematico ed è famoso per aver propugnato, difeso e alla fine definitivamente promosso l'evidenza del sistema eliocentrico contro il sistema geocentrico fino ad allora sostenuto in Europa."^^xsd:string ,
+                                             "Nicolaus Copernicus was an astronomer, mathematician and is famous for having advocated, defended and ultimately promoted the evidence of the heliocentric system against the geocentric system hitherto supported in Europe."^^xsd:string ;
+                                rdfs:label "Copernicus Nicolaus (VIAF)"@en ,
+                                           "Niccolò Copernico (VIAF)"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Antoine_Lavoisier
+:Antoine_Lavoisier rdf:type owl:NamedIndividual ;
+                   owl:sameAs <https://dbpedia.org/page/Antoine_Lavoisier> ,
+                              <https://www.wikidata.org/wiki/Q39607> ;
+                   :data_di_Nascita "1794-03-26T00:00:00"^^xsd:dateTime ;
+                   :nazione_di_Nascita "Francia"^^xsd:string ;
+                   :nome_Personaggio "Antoine-Laurent de Lavoisier"^^xsd:string ;
+                   rdfs:comment "Lavoisier was a French chemist, biologist, philosopher and economist. He was one of the most important figures in the history of science above all for having enunciated the law of conservation of mass in 1789."^^xsd:string ,
+                                "Lavoisier è stato un chimico, biologo, filosof ed economista francese. Fu uno dei più importanti personaggi della storia della scienza soprattuto per aver enunciato la legge di conservazione della massa nel 1789."^^xsd:string ;
+                   rdfs:label "Antoine Lavoisier"@en ,
+                              "Antoine-Laurent de Lavoisier"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Cartesio
+:Cartesio rdf:type owl:NamedIndividual ;
+          owl:sameAs <https://dbpedia.org/page/Ren%C3%A9_Descartes> ,
+                     <https://www.wikidata.org/wiki/Q9191> ;
+          :data_di_Nascita "1596-03-31T00:00:00"^^xsd:dateTime ;
+          :nazione_di_Nascita "Francia" ;
+          :nome_Personaggio "Renatus Cartesius" ;
+          rdfs:comment "Cartesio è stato un filosofo e matematico francese, fra i pincipai fondatori della matematica e della filosofia moderna."^^xsd:string ,
+                       "René Descartes was a French philosopher and mathematician, one of the founding princes of modern mathematics and philosophy."^^xsd:string ;
+          rdfs:label "Cartesio"@it ,
+                     "René Descartes"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Contributore_esperimento_sulla_massa_dei_reagenti
+:Contributore_esperimento_sulla_massa_dei_reagenti rdf:type owl:NamedIndividual ,
+                                                            :Chimico ;
+                                                   :haSviluppato :Esperimento_massa_dei_reagenti ;
+                                                   :èInterpretatoDa :Antoine_Lavoisier ;
+                                                   rdfs:comment "Individual who represents the creator of the experiment on the conservation of the mass of reactants."^^xsd:string ,
+                                                                "Individuo che rappresenta l'ideatore dell'esperimento sulla conservazione della massa dei reagenti."^^xsd:string ;
+                                                   rdfs:label "Contributore esperimento sulla massa dei reagenti"@it ,
+                                                              "Experiment contributor on the mass of reagents"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Contributore_legge_della_conservazione_della_massa
+:Contributore_legge_della_conservazione_della_massa rdf:type owl:NamedIndividual ,
+                                                             :Chimico ;
+                                                    :haSistematizzato :Legge_della_conservazione_della_massa ;
+                                                    :èInterpretatoDa :Antoine_Lavoisier ;
+                                                    rdfs:comment "Individual who has systematized the law of Lavoisier."^^xsd:string ,
+                                                                 "Individuo che ha sistematizzato la legge della conservazione della massa."^^xsd:string ;
+                                                    rdfs:label "Contributor Law of Lavoisier"@en ,
+                                                               "Contributore legge della conservazione della massa"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Dinamica_newtoniana
+:Dinamica_newtoniana rdf:type owl:NamedIndividual ;
+                     :èParteDi :Teoria_meccanicista ;
+                     :nome_Teoria "Dinamica Newtoniana" ;
+                     rdfs:comment "In fisica, la dinamica è il ramo della meccanica newtoniana che si occupa dello studio del moto dei corpi a partire dalle sue cause (forze) o, in termini più concreti, delle circostanze che lo determinano e lo modificano nel tempo e nello spazio del suo sistema di riferimento."^^xsd:string ,
+                                  "In physics, dynamics is the branch of Newtonian mechanics that deals with the study of the motion of bodies starting from its causes (forces) or, in more concrete terms, the circumstances that determine and modify it in the time and space of its reference system."^^xsd:string ;
+                     rdfs:label "Dinamica newtoniana"@it ,
+                                "Dynamics (mechanics)"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Esperimento_massa_dei_reagenti
+:Esperimento_massa_dei_reagenti rdf:type owl:NamedIndividual ;
+                                :utilizzaOggetto :Reagente ;
+                                :utilizzaPrincipio :Legge_della_conservazione_della_massa ;
+                                :èIntrodotto :epoca_classica ;
+                                :esperimento_denominato "Esperimento sulla conservazione della massa"^^xsd:string ;
+                                rdfs:comment "Esperimento focalizzato sugli aspetti quantitativi; utilizzando una semplice bilancia, si misura la massa delle sostanze che vanno fatte reagire (reagenti) e quella delle sostanze ottenute alla fine della reazione (prodotti) e le si mettono a confronto. In questo modo si osserva che se la reazione avviene in un contenitore chiuso, cioè senza scambio di materia con l'esterno, le masse dei reagenti e quelle dei prodotti sono uguali. Questo importante risultato permise di formulare quella che è nota come la legge di conservazione della massa."^^xsd:string ,
+                                             "Experiment focused on quantitative aspects; using a simple balance, the mass of the substances to be reacted (reactants) and that of the substances obtained at the end of the reaction (products) are measured and compared. In this way it is observed that if the reaction takes place in a closed container, ie without exchange of matter with the outside, the masses of the reactants and those of the products are the same. This important result allowed to formulate what is known as the law of conservation of mass."^^xsd:string ;
+                                rdfs:label "Esperimento massa dei reagenti"@it ,
+                                           "Mass experiment of the reactants"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Galileo_Galilei
+:Galileo_Galilei rdf:type owl:NamedIndividual ;
+                 owl:sameAs <https://dbpedia.org/page/Galileo_Galilei> ,
+                            <https://www.wikidata.org/wiki/Q307> ;
+                 :data_di_Nascita "1564-02-15T00:00:00"^^xsd:dateTime ;
+                 :nazione_di_Nascita "Italia" ;
+                 :nome_Personaggio "Galileo Galilei" ;
+                 rdfs:comment "Galileo Galilei è stato un fisico, astronomo, fllosofo, matematico considerato il padre della scienza moderna. Personaggio chiave della rivoluzione scientifica."^^xsd:string ,
+                              "Galileo di Vincenzo Bonaiuti de' Galilei was a physicist, astronomer, philosopher, mathematician considered the father of modern science. Key figure of the scientific revolution."^^xsd:string ;
+                 rdfs:label "Galileo Galilei"@it ,
+                            "Galileo di Vincenzo Bonaiuti de' Galilei"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Isaac_Newton
+:Isaac_Newton rdf:type owl:NamedIndividual ;
+              owl:sameAs <https://dbpedia.org/page/Isaac_Newton> ,
+                         <https://www.wikidata.org/wiki/Q935> ;
+              :data_di_Nascita "1642-12-25T00:00:00"^^xsd:dateTime ;
+              :nazione_di_Nascita "Regno Unito" ;
+              :nome_Personaggio "Isaac Newton" ;
+              rdfs:comment "Sir Isaac Newton was an English matematician, physicist, astronomer, theologian, widely recognised as one of the greatest mathematicians and physicist of all time and among the most influential scientists."^^xsd:string ,
+                           "Sir Isaac Newton è stato un matematico, fisico, astronomo, teologo inglese, ampiamente riconosciuto come uno dei più grandi matematici e fisici di tutti i tempi e tra gli scienziati più influenti."^^xsd:string ;
+              rdfs:label "Isaac Newton"@it ,
+                         "Sir Isaac Newton"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Legge_della_conservazione_della_massa
+:Legge_della_conservazione_della_massa rdf:type owl:NamedIndividual ;
+                                       owl:sameAs <https://dbpedia.org/page/Conservation_of_mass> ;
+                                       :utilizzaOggetto :Reagente ;
+                                       :èIntrodotto :epoca_classica ;
+                                       :nome_Principio "Legge della conservazione della massa"^^xsd:string ;
+                                       rdfs:comment "In chemistry the law of conservation of mass is a weight law and states that: in a chemical reaction, which takes place in a closed circuit, the sum of the masses of the reactants is equal to the sum of the masses of the products."^^xsd:string ,
+                                                    "In chimica la legge della conservazione della massa è una legge ponderale ed enuncia che: in una reazione chimica, che avviene in un circuito chiuso, la somma delle masse dei reagenti è uguale alla somma delle masse dei prodotti."^^xsd:string ;
+                                       rdfs:label "Law of Lavoisier"@en ,
+                                                  "Legge della conservazione della massa"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Niccolò_Copernico
+:Niccolò_Copernico rdf:type owl:NamedIndividual ;
+                   owl:sameAs <https://dbpedia.org/page/Nicolaus_Copernicus> ,
+                              <https://www.wikidata.org/wiki/Q619> ;
+                   :data_di_Nascita "1473-02-19T00:00:00"^^xsd:dateTime ;
+                   :nazione_di_Nascita "Polonia" ;
+                   :nome_Personaggio "Niccolò Copernico" ;
+                   rdfs:comment "Niccolò Copernico è stato un astronomo, matematico ed è famoso per aver propugnato, difeso e alla fine definitivamente promosso l'evidenza del sistema eliocentrico contro il sistema geocentrico fino ad allora sostenuto in Europa."^^xsd:string ,
+                                "Nicolaus Copernicus was an astronomer, mathematician and is famous for having advocated, defended and ultimately supported the evidence of the heliocentric system against the geocentric system supported in Europe."^^xsd:string ;
+                   rdfs:label "Niccolò Copernico"@it ,
+                              "Nicolaus Copernicus"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Pianeta
+:Pianeta rdf:type owl:NamedIndividual ;
+         :nome_Oggetto "Pianeta"^^xsd:string ;
+         rdfs:comment "A planet is a celestial body that orbits a star and which, unlike this, does not produce energy through nuclear fusion, whose mass is sufficient to give it a spheroidal shape, where its gravitational dominance allows it to keep its free. orbital fascia from other bodies of comparable or larger size."^^xsd:string ,
+                      "Un pianeta è un corpo celeste che orbita attorno a una stella e che, a differenza di questa, non produce energia tramite fusione nucleare, la cui massa è sufficiente a conferirgli una forma sferoidale, laddove la propria dominanza gravitazionale gli permette di mantenere libera la sua fascia orbitale da altri corpi di dimensioni comparabili o superiori."^^xsd:string ;
+         rdfs:label "Pianeta"@it ,
+                    "Planet"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Piano_inclinato
+:Piano_inclinato rdf:type owl:NamedIndividual ;
+                 :anno_Creazione "1604-01-01T00:00:00"^^xsd:dateTime ;
+                 :nome_Oggetto "Piano inclinato" ;
+                 rdfs:comment "Il piano inclinato è un artefatto utilizzato da Galileo per poter risolvere il problema del calcolo del tempo nell'esperimento della caduta del grave."^^xsd:string ,
+                              "The inclined plane is an artifact used by Galileo to solve the problem of calculating time in the experiment of the fall of the body."^^xsd:string ;
+                 rdfs:label "Inclined plane"@en ,
+                            "Piano inclinato"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Prima_legge_della_dinamica
+:Prima_legge_della_dinamica rdf:type owl:NamedIndividual ;
+                            :èParteDi :Dinamica_newtoniana ;
+                            :nome_Principio "Prima legge della dinamica"^^xsd:string ;
+                            rdfs:comment "Principio, noto come principio d'inerzia, afferma che un corpo continuerà a muoversi di moto rettilineo uniforme se non è soggetto a forze esterne."^^xsd:string ,
+                                         "Principle, known as the inertia principle, states that a body continues to move in a uniform rectilinear motion if it is not subjected to external forces."^^xsd:string ;
+                            rdfs:label "First law of dynamics"@en ,
+                                       "Prima legge della dinamica"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Principia
+:Principia rdf:type owl:NamedIndividual ;
+           owl:sameAs <https://www.wikidata.org/wiki/Q205921> ;
+           :èParteDi :Dinamica_newtoniana ;
+           :nome_Principio "Principia"^^xsd:string ;
+           rdfs:comment "I principi matematici della filosofia naturale è un trattato in tre libri di Isaac Newton, pubblicato il 5 luglio 1687: unanimemente considerato una delle più importanti opere del pensiero scientifico, in essa lo scienziato inglese enunciò le leggi della dinamica e la legge di gravitazione universale."^^xsd:string ,
+                        "Philosophiae Naturalis Principia Mathematica is a treatise in three books by Isaac Newton, published on July 5, 1687: unanimously considered one of the most important works of scientific thought, in it the English scientist enunciated the laws of dynamics and the law of universal gravitation."^^xsd:string ;
+           rdfs:label "Principia"@en ,
+                      "Principia"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Reagente
+:Reagente rdf:type owl:NamedIndividual ;
+          owl:sameAs <https://dbpedia.org/page/Reagent> ,
+                     <https://www.wikidata.org/wiki/Q45342565> ;
+          :nome_Oggetto "Reagente"^^xsd:string ;
+          rdfs:comment "A reagent is defined as any substance that takes part in a chemical reaction by consuming itself."^^xsd:string ,
+                       "Si definisce reagente qualsiasi sostanza che prende parte a una reazione chimica consumandosi."^^xsd:string ;
+          rdfs:label "Reagent"@en ,
+                     "Reagente"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Sistema_eliocentrico
+:Sistema_eliocentrico rdf:type owl:NamedIndividual ;
+                      owl:sameAs <https://dbpedia.org/page/Heliocentrism> ,
+                                 <https://www.wikidata.org/wiki/Q103983> ;
+                      :utilizzaOggetto :Pianeta ,
+                                       :Sole ;
+                      :èParteDi :Teoria_copernicana ;
+                      :nome_Principio "Sistema eliocentrico"^^xsd:string ;
+                      rdfs:comment "Heliocentrism is an astronomical theory that assumes that the Sun is at the center of the solar system and the universe (the distinction between the solar system and the universe has not been clear until recently, but extremely important in cosmological and religious controversies), and that the planets revolve around it."^^xsd:string ,
+                                   "L'eliocentrismo è una teoria astronomica che ipotizza che il Sole sia al centro del sistema solare e dell'universo (la distinzione fra sistema solare ed universo non è stata chiara fino a tempi recenti, ma estremamente importante nelle controversie cosmologiche e religiose), e che i pianeti vi girino intorno."^^xsd:string ;
+                      rdfs:label "Heliocentrism"@en ,
+                                 "Sistema eliocentrico"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Sole
+:Sole rdf:type owl:NamedIndividual ;
+      owl:sameAs <https://dbpedia.org/page/Sun> ,
+                 <https://www.wikidata.org/wiki/Q525> ;
+      :nome_Oggetto "Sole"^^xsd:string ;
+      rdfs:comment "Il Sole è la stella madre del sistema solare, attorno al quale orbitano gli otto pianeti principali (tra cui la Terra), i pianeti nani, i loro satelliti, innumerevoli altri corpi minori e la polvere diffusa per lo spazio, che forma il mezzo interplanetario."^^xsd:string ,
+                   "The Sun is the mother star of the solar system, around which the eight main planets (including the Earth), the dwarf planets, their satellites, countless other minor bodies and the dust scattered through space, which forms the interplanetary medium orbit."^^xsd:string ;
+      rdfs:label "Sole"@it ,
+                 "Sun"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Teoria_copernicana
+:Teoria_copernicana rdf:type owl:NamedIndividual ;
+                    owl:sameAs <https://www.wikidata.org/wiki/Q3984081> ;
+                    :nome_Teoria "Teoria Copernicana" ;
+                    rdfs:comment "La teoria copernicana è la descrizione matematica del moto dei corpi celesti che Niccolò Copernico introdusse nella prima metà del XVI secolo. Si tratta di un sistema eliocentrico: «E in mezzo a tutto sta il Sole»."^^xsd:string ,
+                                 "The Copernican theory is the mathematical description of the motion of celestial bodies that Nicolaus Copernicus introduced in the first half of the sixteenth century. It is a heliocentric system: \"And in the midst of everything is the Sun\"."^^xsd:string ;
+                    rdfs:label "Copernican heliocentrism"@en ,
+                               "Teoria copernicana"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#Teoria_meccanicista
+:Teoria_meccanicista rdf:type owl:NamedIndividual ;
+                     :nome_Teoria "Teoria Meccanicista" ;
+                     rdfs:comment "Il meccanicismo è una concezione filosofica che sostiene la natura esclusivamente corporea di tutti gli enti, assimilati ad un assemblaggio di più parti componibili tra loro, il cui comportamento motorio è ritenuto esclusivamente di tipo meccanico, privo cioè di un fine o di un ordine che non sia quello stabilito da cause unicamente quantitative."^^xsd:string ,
+                                  "Mechanism is a philosophical conception that supports the exclusively corporeal nature of all entities, assimilated to an assembly of several modular parts, whose motor behavior is considered exclusively of a mechanical type, that is, devoid of an end or an order that does not is that established by purely quantitative causes."^^xsd:string ;
+                     rdfs:label "Mechanical philosophy"@en ,
+                                "Teoria meccanicista"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#contributoreCaduta_del_grave
+:contributoreCaduta_del_grave rdf:type owl:NamedIndividual ,
+                                       :Fisico ;
+                              :haSviluppato :esperimentoCaduta_del_grave ;
+                              :èInterpretatoDa :Galileo_Galilei ;
+                              rdfs:comment "Individual representing the inventors or developers of the grave fall experiment."^^xsd:string ,
+                                           "Individuo che rappresenta gli inventori o sviluppatori dell'esperimento caduta del grave."^^xsd:string ;
+                              rdfs:label "Contributor fall of the grave"@en ,
+                                         "Contributore caduta del grave"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#contributoreLeggi_della_dinamica
+:contributoreLeggi_della_dinamica rdf:type owl:NamedIndividual ,
+                                           :Fisico ;
+                                  :haSistematizzato :Prima_legge_della_dinamica ;
+                                  :èInterpretatoDa :Isaac_Newton ;
+                                  rdfs:comment "Individual who represents the inventors or developers of the laws of dynamics."^^xsd:string ,
+                                               "Individuo che rappresenta gli inventori o gli sviluppatori delle leggi della dinamica."^^xsd:string ;
+                                  rdfs:label "Contributor Laws of Dynamics"@en ,
+                                             "Contributore leggi della dinamica"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#contributorePrincipia
+:contributorePrincipia rdf:type owl:NamedIndividual ,
+                                :Filosofo ;
+                       :haSistematizzato :Principia ;
+                       :èInterpretatoDa :Isaac_Newton ;
+                       rdfs:comment "Individual who represents Principia's inventors or developers."^^xsd:string ,
+                                    "Individuo che rappresenta gli inventori o gli sviluppatori di Principia."^^xsd:string ;
+                       rdfs:label "Contributore Principia"@it ,
+                                  "Principia Contributor"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#contributoreRealtàSuddivisa
+:contributoreRealtàSuddivisa rdf:type owl:NamedIndividual ,
+                                      :Filosofo ;
+                             :haSistematizzato :res_cogitans_res_extensa ;
+                             :èInterpretatoDa :Cartesio ;
+                             rdfs:comment "Individual who represents the inventors or developers of the philosophical principle \"Res cogitans e res extensa\"."^^xsd:string ,
+                                          "Individuo che rappresenta gli inventori o gli sviluppatori del principio filosofico \"Res cogitans e res extensa\"."^^xsd:string ;
+                             rdfs:label "Contributore realtà suddivisa"@it ,
+                                        "Subdivided reality contributor"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#contributoreSistema_eliocentrico
+:contributoreSistema_eliocentrico rdf:type owl:NamedIndividual ,
+                                           :Astronomo ;
+                                  :haSistematizzato :Sistema_eliocentrico ;
+                                  :èInterpretatoDa :Galileo_Galilei ,
+                                                   :Niccolò_Copernico ;
+                                  rdfs:comment "Individual who represents the inventors or developers of the heliocentric system."^^xsd:string ,
+                                               "Individuo che rappresenta gli inventori o gli sviluppatori del sistema eliocentrico."^^xsd:string ;
+                                  rdfs:label "Contributore Sistema eliocentrico"@it ,
+                                             "Heliocentric System Contributor"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#epoca_classica
+:epoca_classica rdf:type owl:NamedIndividual ;
+                :fine_Periodo_Temporale "1901-01-01T00:00:00"^^xsd:dateTime ;
+                :inizio_Periodo_Temporale "1601-01-01T00:00:00"^^xsd:dateTime ;
+                :nome_Epoca "epoca classica" ;
+                rdfs:comment "By classical epoch, in this description, we properly mean the period beginning with Galileo who introduces the scientific method and the foundation of the theory of relativity."^^xsd:string ,
+                             "Per epoca classica, in questa descrizione, si intende propriamente il periodo che inizia con Galileo che introduce il metodo scientifico e la fondazione della teoria della relatività."^^xsd:string ;
+                rdfs:label "Classical epoch"@en ,
+                           "Epoca classica"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#epoca_eliocentrica
+:epoca_eliocentrica rdf:type owl:NamedIndividual ;
+                    :precedeTemporalmente :epoca_moderna ;
+                    :inizio_Periodo_Temporale "1543-01-01T00:00:00"^^xsd:dateTime ;
+                    :nome_Epoca "epoca eliocentrica" ;
+                    rdfs:comment "By heliocentric epoch is meant, in this description, as the time period in which the heliocentric system was sustained for the first time in the community until the decay of this theory."^^xsd:string ,
+                                 "Per epoca eliocentrica si intende, in questa descrizione, come il periodo temporale in cui si è sostenuto per la prima volta il sistema eliocentrico nella comunità fino al decadimento di tale teoria."^^xsd:string ;
+                    rdfs:label "Epoca eliocentrica"@it ,
+                               "Heliocentric epoch"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#epoca_moderna
+:epoca_moderna rdf:type owl:NamedIndividual ;
+               :inizio_Periodo_Temporale "1901-01-01T00:00:00"^^xsd:dateTime ;
+               :nome_Epoca "epoca moderna" ;
+               rdfs:comment "Epoca moderna è il periodo temporale in cui viene introdotta la teoria della relatività fino al presente."^^xsd:string ,
+                            "Modern epoch is the time period in which the theory of relativity is introduced up to the present."^^xsd:string ;
+               rdfs:label "Epoca moderna"@it ,
+                          "Modern epoch"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#esperimentoCaduta_del_grave
+:esperimentoCaduta_del_grave rdf:type owl:NamedIndividual ;
+                             :utilizzaPrincipio :Prima_legge_della_dinamica ;
+                             :utilizzaStrumento :Piano_inclinato ,
+                                                :orologio_ad_acqua ;
+                             :èIntrodotto :epoca_classica ;
+                             :esperimento_denominato "Caduta del grave"^^xsd:string ;
+                             rdfs:comment "Individual representing the scientists who invented or helped develop the grave fall experiment."^^xsd:string ,
+                                          "Individuo che rappresenta gli scienziati che hanno inventato o contribuito a sviluppare l'esperimento caduta del grave."^^xsd:string ;
+                             rdfs:label "Esperimento caduta del grave"@it ,
+                                        "Grave's Fall Experiment"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#orologio_ad_acqua
+:orologio_ad_acqua rdf:type owl:NamedIndividual ;
+                   :anno_Creazione "1560-01-01T00:00:00"^^xsd:dateTime ;
+                   :nome_Oggetto "Orologio ad acqua" ;
+                   rdfs:comment "L'orologio ad acqua è uno strumento inventato da Galileo Galilei utilizzato per calcolare periodi temporali con l'ordine del decimo di secondo."^^xsd:string ,
+                                "The water clock is an instrument invented by Galileo Galilei used to calculate time periods with the order of a tenth of a second."^^xsd:string ;
+                   rdfs:label "Orologio ad acqua"@it ,
+                              "Water clock"@en .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#prima_rivoluzione_scientifica
+:prima_rivoluzione_scientifica rdf:type owl:NamedIndividual ;
+                               :causa :epoca_classica ;
+                               :causatoDa :Galileo_Galilei ;
+                               :anno_di_Verifica "1543-01-01T00:00:00"^^xsd:dateTime ;
+                               :nome_Evento "Prima Rivoluzione Scientifica" ;
+                               rdfs:comment "La rivoluzione scientifica fu una fase di straordinario sviluppo della scienza che si sviluppò grazie al contributo di Galileo Galilei introducendo il metodo scientifico."^^xsd:string ,
+                                            "The scientific revolution was a phase of extraordinary development of science that developed thanks to the contribution of Galileo Galilei by introducing the scientific method."^^xsd:string ;
+                               rdfs:label "First scientific revolution"@en ,
+                                          "Prima rivoluzione scientifica"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#res_cogitans_res_extensa
+:res_cogitans_res_extensa rdf:type owl:NamedIndividual ;
+                          owl:sameAs <https://www.wikidata.org/wiki/Q2236765> ;
+                          :èParteDi :Teoria_meccanicista ;
+                          :nome_Principio "Res cogitans e res extensa"^^xsd:string ;
+                          rdfs:comment "Cartesio suddivide la realtà in res cogitans e res extensa. Con res cogitans s'intende la realtà psichica, a cui Cartesio attribuisce le seguenti qualità: inestensione, libertà e consapevolezza. La res extensa rappresenta invece la realtà fisica, che è estesa, limitata e inconsapevole."^^xsd:string ,
+                                       "Descartes divides reality into res cogitans and res extensa. With res cogitans we mean the psychic reality, to which Descartes attributes the following qualities: inextension, freedom and awareness. The res extensa instead represents physical reality, which is extended, limited and unconscious."^^xsd:string ;
+                          rdfs:label "Res cogitans e res extensa"@en ,
+                                     "Res cogitans e res extensa"@it .
+
+
+###  http://www.semanticweb.org/39345/ontologies/2021/11/OntologyScience#rivoluzione_copernicana
+:rivoluzione_copernicana rdf:type owl:NamedIndividual ;
+                         :causa :epoca_eliocentrica ;
+                         :causatoDa :Niccolò_Copernico ;
+                         :anno_di_Verifica "1543-01-01T00:00:00"^^xsd:dateTime ;
+                         :nome_Evento "Rivoluzione Copernicana" ;
+                         rdfs:comment "Col termine rivoluzione copernicana si intende la svolta nella concezione dell'Universo propugnata da Niccolò Copernico, autore della moderna teoria eliocentrica del sistema solare. Questa teoria pone il Sole al centro del sistema di orbite dei pianeti e si contrappone a quella geocentrica, che prevedeva invece la Terra al centro del sistema solare."^^xsd:string ,
+                                      "With the Copernican revolution we mean the turning point in the conception of the Universe advocated by Niccolò Copernico, author of the modern heliocentric theory of the solar system. This theory places the Sun at the center of the orbit system of the planets and contrasts with the geocentric one, which instead envisioned the Earth as the center of the solar system."^^xsd:string ;
+                         rdfs:label "Copernican revolution"@en ,
+                                    "Rivoluzione Copernicana"@it .
+
+
+###  https://dbpedia.org/page/Antoine_Lavoisier
+<https://dbpedia.org/page/Antoine_Lavoisier> rdf:type owl:NamedIndividual ;
+                                             owl:sameAs <https://www.wikidata.org/wiki/Q39607> ;
+                                             skos:exactMatch :Antoine_Lavoisier ;
+                                             rdfs:comment "Lavoisier was a French chemist, biologist, philosopher and economist. He was one of the most important figures in the history of science above all for having enunciated the law of conservation of mass in 1789."^^xsd:string ,
+                                                          "Lavoisier è stato un chimico, biologo, filosof ed economista francese. Fu uno dei più importanti personaggi della storia della scienza soprattuto per aver enunciato la legge di conservazione della massa nel 1789."^^xsd:string ;
+                                             rdfs:label "Antoine Lavoisier (DBpedia)"@en ,
+                                                        "Antoine-Laurent de Lavoisier (DBpedia)"@it .
+
+
+###  https://dbpedia.org/page/Conservation_of_mass
+<https://dbpedia.org/page/Conservation_of_mass> rdf:type owl:NamedIndividual ;
+                                                owl:sameAs <https://www.wikidata.org/wiki/Q3829752> ;
+                                                rdfs:comment "In chemistry the law of conservation of mass is a weight law and states that: in a chemical reaction, which takes place in a closed circuit, the sum of the masses of the reactants is equal to the sum of the masses of the products."^^xsd:string ,
+                                                             "In chimica la legge della conservazione della massa è una legge ponderale ed enuncia che: in una reazione chimica, che avviene in un circuito chiuso, la somma delle masse dei reagenti è uguale alla somma delle masse dei prodotti."^^xsd:string ;
+                                                rdfs:label "Law of Lavoisier (DBpedia)"@en ,
+                                                           "Legge della conservazione della massa (DBpedia)"@it .
+
+
+###  https://dbpedia.org/page/Galileo_Galilei
+<https://dbpedia.org/page/Galileo_Galilei> rdf:type owl:NamedIndividual ;
+                                           rdfs:comment "Galileo Galilei was a physicist, astronomer, philosopher, mathematician considered the father of modern science. Key figure of the scientific revolution."^^xsd:string ,
+                                                        "Galileo Galilei è stato un fisico, astronomo, fllosofo, matematico considerato il padre della scienza moderna. Personaggio chiave della rivoluzione scientifica."^^xsd:string ;
+                                           rdfs:label "Galileo Galilei (DBpedia)"@it ,
+                                                      "Galileo di Vincenzo Bonaiuti de' Galilei (DBpedia)"@en .
+
+
+###  https://dbpedia.org/page/Heliocentrism
+<https://dbpedia.org/page/Heliocentrism> rdf:type owl:NamedIndividual ;
+                                         rdfs:comment "Heliocentrism is an astronomical theory that assumes that the Sun is at the center of the solar system and the universe (the distinction between the solar system and the universe has not been clear until recently, but extremely important in cosmological and religious controversies), and that the planets revolve around it."^^xsd:string ,
+                                                      "L'eliocentrismo è una teoria astronomica che ipotizza che il Sole sia al centro del sistema solare e dell'universo (la distinzione fra sistema solare ed universo non è stata chiara fino a tempi recenti, ma estremamente importante nelle controversie cosmologiche e religiose), e che i pianeti vi girino intorno."^^xsd:string ;
+                                         rdfs:label "Heliocentrism (DBpedia)"@en ,
+                                                    "Sistema eliocentrico (DBpedia)"@it .
+
+
+###  https://dbpedia.org/page/Isaac_Newton
+<https://dbpedia.org/page/Isaac_Newton> rdf:type owl:NamedIndividual ;
+                                        rdfs:comment "Sir Isaac Newton was an English mathematician, physicist, astronomer, theologian, widely recognized as one of the greatest mathematicians and physicists of all time and among the most influential scientists."^^xsd:string ,
+                                                     "Sir Isaac Newton è stato un matematico, fisico, astronomo, teologo inglese, ampiamente riconosciuto come uno dei più grandi matematici e fisici di tutti i tempi e tra gli scienziati più influenti."^^xsd:string ;
+                                        rdfs:label "Isaac Newton (DBpedia)"@en ,
+                                                   "Isaac Newton (DBpedia)"@it .
+
+
+###  https://dbpedia.org/page/Nicolaus_Copernicus
+<https://dbpedia.org/page/Nicolaus_Copernicus> rdf:type owl:NamedIndividual ;
+                                               rdfs:comment "Niccolò Copernico è stato un astronomo, matematico ed è famoso per aver propugnato, difeso e alla fine definitivamente promosso l'evidenza del sistema eliocentrico contro il sistema geocentrico fino ad allora sostenuto in Europa."^^xsd:string ,
+                                                            "Nicolaus Copernicus was an astronomer, mathematician and is famous for having advocated, defended and ultimately promoted the evidence of the heliocentric system against the geocentric system hitherto supported in Europe."^^xsd:string ;
+                                               rdfs:label "Niccolò Copernico (DBpedia)"@it ,
+                                                          "Nicolaus Copernicus (DBpedia)"@en .
+
+
+###  https://dbpedia.org/page/Reagent
+<https://dbpedia.org/page/Reagent> rdf:type owl:NamedIndividual ;
+                                   rdfs:comment "A reagent is defined as any substance that takes part in a chemical reaction by consuming itself."^^xsd:string ,
+                                                "Si definisce reagente qualsiasi sostanza che prende parte a una reazione chimica consumandosi."^^xsd:string ;
+                                   rdfs:label "Reagent (DBpedia)"@en ,
+                                              "Reagente (DBpedia)"@it .
+
+
+###  https://dbpedia.org/page/Sun
+<https://dbpedia.org/page/Sun> rdf:type owl:NamedIndividual ;
+                               rdfs:comment "Il Sole è la stella madre del sistema solare, attorno al quale orbitano gli otto pianeti principali (tra cui la Terra), i pianeti nani, i loro satelliti, innumerevoli altri corpi minori e la polvere diffusa per lo spazio, che forma il mezzo interplanetario."^^xsd:string ,
+                                            "The Sun is the mother star of the solar system, around which the eight main planets (including the Earth), the dwarf planets, their satellites, countless other minor bodies and the dust scattered through space, which forms the interplanetary medium orbit."^^xsd:string ;
+                               rdfs:label "Sole (DBpedia)"@it ,
+                                          "Sun (DBpedia)"@en .
+
+
+###  https://dbpedia.org/page/Ren%C3%A9_Descartes
+<https://dbpedia.org/page/Ren%C3%A9_Descartes> rdf:type owl:NamedIndividual ;
+                                               rdfs:comment "Cartesio è stato un filosofo e matematico francese, fra i pincipai fondatori della matematica e della filosofia moderna."^^xsd:string ,
+                                                            "Descartes was a French philosopher and mathematician, one of the founding princes of modern mathematics and philosophy."^^xsd:string ;
+                                               rdfs:label "Cartesio (DBpedia)"@it ,
+                                                          "René Descartes (DBpedia)"@en .
+
+
+###  https://www.wikidata.org/wiki/Q103983
+<https://www.wikidata.org/wiki/Q103983> rdf:type owl:NamedIndividual ;
+                                        rdfs:comment "Heliocentrism is an astronomical theory that assumes that the Sun is at the center of the solar system and the universe (the distinction between the solar system and the universe has not been clear until recently, but extremely important in cosmological and religious controversies), and that the planets revolve around it."^^xsd:string ,
+                                                     "L'eliocentrismo è una teoria astronomica che ipotizza che il Sole sia al centro del sistema solare e dell'universo (la distinzione fra sistema solare ed universo non è stata chiara fino a tempi recenti, ma estremamente importante nelle controversie cosmologiche e religiose), e che i pianeti vi girino intorno."^^xsd:string ;
+                                        rdfs:label "Heliocentrism (Wikidata)"@en ,
+                                                   "Sistema eliocentrico (Wikidata)"@it .
+
+
+###  https://www.wikidata.org/wiki/Q205921
+<https://www.wikidata.org/wiki/Q205921> rdf:type owl:NamedIndividual ;
+                                        rdfs:comment "I principi matematici della filosofia naturale è un trattato in tre libri di Isaac Newton, pubblicato il 5 luglio 1687: unanimemente considerato una delle più importanti opere del pensiero scientifico, in essa lo scienziato inglese enunciò le leggi della dinamica e la legge di gravitazione universale."^^xsd:string ,
+                                                     "Philosophiae Naturalis Principia Mathematica is a treatise in three books by Isaac Newton, published on July 5, 1687: unanimously considered one of the most important works of scientific thought, in it the English scientist enunciated the laws of dynamics and the law of universal gravitation."^^xsd:string ;
+                                        rdfs:label "Principia (Wikidata)"@en ,
+                                                   "Principia (Wikidata)"@it .
+
+
+###  https://www.wikidata.org/wiki/Q2236765
+<https://www.wikidata.org/wiki/Q2236765> rdf:type owl:NamedIndividual ;
+                                         rdfs:comment "Cartesio suddivide la realtà in res cogitans e res extensa. Con res cogitans s'intende la realtà psichica, a cui Cartesio attribuisce le seguenti qualità: inestensione, libertà e consapevolezza. La res extensa rappresenta invece la realtà fisica, che è estesa, limitata e inconsapevole."^^xsd:string ,
+                                                      "Descartes divides reality into res cogitans and res extensa. With res cogitans we mean the psychic reality, to which Descartes attributes the following qualities: inextension, freedom and awareness. The res extensa instead represents physical reality, which is extended, limited and unconscious."^^xsd:string ;
+                                         rdfs:label "Res cogitans e res extensa Wikidata"@en ,
+                                                    "Res cogitans e res extensa Wikidata"@it .
+
+
+###  https://www.wikidata.org/wiki/Q307
+<https://www.wikidata.org/wiki/Q307> rdf:type owl:NamedIndividual ;
+                                     rdfs:comment "Galileo Galilei was a physicist, astronomer, philosopher, mathematician considered the father of modern science. Key figure of the scientific revolution."^^xsd:string ,
+                                                  "Galileo Galilei è stato un fisico, astronomo, fllosofo, matematico considerato il padre della scienza moderna. Personaggio chiave della rivoluzione scientifica."^^xsd:string ;
+                                     rdfs:label "Galileo Galilei (Wikidata)"@it ,
+                                                "Galileo di Vincenzo Bonaiuti de' Galilei (Wikidata)"@en .
+
+
+###  https://www.wikidata.org/wiki/Q3829752
+<https://www.wikidata.org/wiki/Q3829752> rdf:type owl:NamedIndividual ;
+                                         rdfs:comment "In chemistry the law of conservation of mass is a weight law and states that: in a chemical reaction, which takes place in a closed circuit, the sum of the masses of the reactants is equal to the sum of the masses of the products."^^xsd:string ,
+                                                      "In chimica la legge della conservazione della massa è una legge ponderale ed enuncia che: in una reazione chimica, che avviene in un circuito chiuso, la somma delle masse dei reagenti è uguale alla somma delle masse dei prodotti."^^xsd:string ;
+                                         rdfs:label "Law of Lavoisier (Wikidata)"@en ,
+                                                    "Legge della conservazione della massa (Wikidata)"@it .
+
+
+###  https://www.wikidata.org/wiki/Q39607
+<https://www.wikidata.org/wiki/Q39607> rdf:type owl:NamedIndividual ;
+                                       rdfs:comment "Lavoisier was a French chemist, biologist, philosopher and economist. He was one of the most important figures in the history of science above all for having enunciated the law of conservation of mass in 1789."^^xsd:string ,
+                                                    "Lavoisier è stato un chimico, biologo, filosofo ed economista francese. Fu uno dei più importanti personaggi della storia della scienza soprattuto per aver enunciato la legge di conservazione della massa nel 1789."^^xsd:string ;
+                                       rdfs:label "Antoine Lavoisier (Wikidata)"@en ,
+                                                  "Antoine-Laurent de Lavoisier (Wikidata)"@it .
+
+
+###  https://www.wikidata.org/wiki/Q3984081
+<https://www.wikidata.org/wiki/Q3984081> rdf:type owl:NamedIndividual ;
+                                         rdfs:comment "La teoria copernicana è la descrizione matematica del moto dei corpi celesti che Niccolò Copernico introdusse nella prima metà del XVI secolo. Si tratta di un sistema eliocentrico: «E in mezzo a tutto sta il Sole»."^^xsd:string ,
+                                                      "The Copernican theory is the mathematical description of the motion of celestial bodies that Nicolaus Copernicus introduced in the first half of the sixteenth century. It is a heliocentric system: \"And in the midst of everything is the Sun\"."^^xsd:string ;
+                                         rdfs:label "Copernican heliocentrism (Wikidata)"@en ,
+                                                    "Teoria Copernicana (Wikidata)"@it .
+
+
+###  https://www.wikidata.org/wiki/Q45342565
+<https://www.wikidata.org/wiki/Q45342565> rdf:type owl:NamedIndividual ;
+                                          rdfs:comment "A reagent is defined as any substance that takes part in a chemical reaction by consuming itself."^^xsd:string ,
+                                                       "Si definisce reagente qualsiasi sostanza che prende parte a una reazione chimica consumandosi."^^xsd:string ;
+                                          rdfs:label "Reagent (Wikidata)"@en ,
+                                                     "Reagente (Wikidata)"@it .
+
+
+###  https://www.wikidata.org/wiki/Q525
+<https://www.wikidata.org/wiki/Q525> rdf:type owl:NamedIndividual ;
+                                     rdfs:comment "Il Sole è la stella madre del sistema solare, attorno al quale orbitano gli otto pianeti principali (tra cui la Terra), i pianeti nani, i loro satelliti, innumerevoli altri corpi minori e la polvere diffusa per lo spazio, che forma il mezzo interplanetario."^^xsd:string ,
+                                                  "The Sun is the mother star of the solar system, around which the eight main planets (including the Earth), the dwarf planets, their satellites, countless other minor bodies and the dust scattered through space, which forms the interplanetary medium orbit. ."^^xsd:string ;
+                                     rdfs:label "Sole (Wikidata)"@it ,
+                                                "Sun (Wikidata)"@en .
+
+
+###  https://www.wikidata.org/wiki/Q619
+<https://www.wikidata.org/wiki/Q619> rdf:type owl:NamedIndividual ;
+                                     rdfs:comment "Niccolò Copernico è stato un astronomo, matematico ed è famoso per aver propugnato, difeso e alla fine definitivamente promosso l'evidenza del sistema eliocentrico contro il sistema geocentrico fino ad allora sostenuto in Europa."^^xsd:string ,
+                                                  "Nicolaus Copernicus was an astronomer, mathematician and is famous for having advocated, defended and ultimately supported the evidence of the heliocentric system against the geocentric system supported in Europe."^^xsd:string ;
+                                     rdfs:label "Niccolò Copernico (Wikidata)"@it ,
+                                                "Nicolaus Copernicus (Wikidata)"@en .
+
+
+###  https://www.wikidata.org/wiki/Q9191
+<https://www.wikidata.org/wiki/Q9191> rdf:type owl:NamedIndividual ;
+                                      rdfs:comment "Cartesio è stato un filosofo e matematico francese, fra i pincipai fondatori della matematica e della filosofia moderna."^^xsd:string ,
+                                                   "Descartes was a French philosopher and mathematician, one of the founding princes of modern mathematics and philosophy."^^xsd:string ;
+                                      rdfs:label "Cartesio (Wikidata)"@it ,
+                                                 "René Descartes (Wikidata)"@en .
+
+
+###  https://www.wikidata.org/wiki/Q935
+<https://www.wikidata.org/wiki/Q935> rdf:type owl:NamedIndividual ;
+                                     rdfs:comment "Sir Isaac Newton was an English mathematician, physicist, astronomer, theologian, widely recognized as one of the greatest mathematicians and physicists of all time and among the most influential scientists."^^xsd:string ,
+                                                  "Sir Isaac Newton è stato un matematico, fisico, astronomo, teologo inglese, ampiamente riconosciuto come uno dei più grandi matematici e fisici di tutti i tempi e tra gli scienziati più influenti."^^xsd:string ;
+                                     rdfs:label "Isaac Newton (Wikidata)"@en ,
+                                                "Isaac Newton (Wikidata)"@it .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( :Antoine_Lavoisier
+                        :Cartesio
+                        :Galileo_Galilei
+                        :Isaac_Newton
+                        :Niccolò_Copernico
+                      )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( :Cartesio
+                        :Galileo_Galilei
+                        :Isaac_Newton
+                        :Niccolò_Copernico
+                      )
+] .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
